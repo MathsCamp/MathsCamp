@@ -41,40 +41,39 @@ export default function NavbarPostlogin() {
             alt="Logo of a calculator"
             onClick={handleHome}
           ></img>
-
-        </Col>
-        <Col className="app-name-col-postlogin">
-          <h6 className="navbar-brand-postlogin">Maths Camp</h6>
-        </Col>
-        <Col>
-          <div className="btn-toolbar postlogin-toolbar">
-            <Button
-              className="btn-primary lg ranking-btn-postlogin"
-              onClick={handleMyPage}
-            >
-              Ranking <Trophy size={15} />
-            </Button>
-            <Button
-              className="btn-primary lg home-btn-postlogin"
-              onClick={handleHome}
-            >
-              Home <HouseDoor size={15} />
-            </Button>
-            <Button
-              className="contact-link contact-btn"
-              onClick={handleSendEmail}
-            >
-              Contact <BsMailbox size={15} />
-            </Button>
-            <Button
-              className="btn-primary lg logout-btn-postlogin"
-              onClick={handleLogOut}
-            >
-              Log out <DoorOpen size={15} />
-            </Button>
-          </div>
-        </Col>
-      </Row>
-    </Container>
+        </div>
+      </Col>
+      <Col className="app-name-col-postlogin">
+        <h6 className="navbar-brand-postlogin">Maths Camp</h6>
+      </Col>
+      <Col>
+        <div className="btn-toolbar postlogin-toolbar">
+          <Button
+            className="btn-primary lg ranking-btn-postlogin"
+            onClick={handleMyPage}
+          >
+            Ranking <Trophy size={15} />
+          </Button>
+          <Button
+            className="btn-primary lg home-btn-postlogin"
+            onClick={handleHome}
+          >
+            Home <HouseDoor size={15} />
+          </Button>
+          <Button
+            className="contact-link contact-btn"
+            onClick={handleSendEmail}
+          >
+            Contact <BsMailbox size={15} />
+          </Button>
+          <Button
+            className="btn-primary lg logout-btn-postlogin"
+            onClick={handleLogOut}
+          >
+            Log out <DoorOpen size={15} />
+          </Button>
+        </div>
+      </Col>
+    </Container >
   );
 }

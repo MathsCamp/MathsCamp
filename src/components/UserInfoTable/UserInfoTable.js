@@ -67,8 +67,8 @@ export default function UserInfoTable({
         </tr>
         <tr>
           <td>Current algebra level</td>
-          <td>
-            <span>{total_categories} categories</span>
+
+          <span>{total_categories} categories</span>
           <td className="body-text">
             <BsCoin size={25} className="category-icon" color={"#28A3EE"} />
             Your Points
