@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/MathsCamp/static/css/main.67366948.css",
-    "main.js": "/MathsCamp/static/js/main.e10b19b7.js",
+    "main.css": "/MathsCamp/static/css/main.d0911b9e.css",
+    "main.js": "/MathsCamp/static/js/main.39663a19.js",
     "static/js/787.9c793c4c.chunk.js": "/MathsCamp/static/js/787.9c793c4c.chunk.js",
     "static/media/breakCamel.png": "/MathsCamp/static/media/breakCamel.831e24214bb5f78255d9.png",
     "static/media/rubik-all-400-normal.woff": "/MathsCamp/static/media/rubik-all-400-normal.84344aed90cae7142af2.woff",
@@ -67,12 +67,12 @@
     "index.html": "/MathsCamp/index.html",
     "static/media/blank-image.PNG": "/MathsCamp/static/media/blank-image.60cfc62dfa465bed9c24.PNG",
     "static/media/SpeakBoble.svg": "/MathsCamp/static/media/SpeakBoble.52d518f5696e3ab329bf36869a741871.svg",
-    "main.67366948.css.map": "/MathsCamp/static/css/main.67366948.css.map",
-    "main.e10b19b7.js.map": "/MathsCamp/static/js/main.e10b19b7.js.map",
+    "main.d0911b9e.css.map": "/MathsCamp/static/css/main.d0911b9e.css.map",
+    "main.39663a19.js.map": "/MathsCamp/static/js/main.39663a19.js.map",
     "787.9c793c4c.chunk.js.map": "/MathsCamp/static/js/787.9c793c4c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.67366948.css",
-    "static/js/main.e10b19b7.js"
+    "static/css/main.d0911b9e.css",
+    "static/js/main.39663a19.js"
   ]
 }
