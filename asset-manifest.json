@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.0db18080.css",
-    "main.js": "/static/js/main.28d2b78a.js",
+    "main.css": "/static/css/main.6612ade8.css",
+    "main.js": "/static/js/main.ff4d69cd.js",
     "static/js/787.9c793c4c.chunk.js": "/static/js/787.9c793c4c.chunk.js",
     "static/media/breakCamel.png": "/static/media/breakCamel.831e24214bb5f78255d9.png",
     "static/media/rubik-all-400-normal.woff": "/static/media/rubik-all-400-normal.84344aed90cae7142af2.woff",
@@ -67,12 +67,12 @@
     "index.html": "/index.html",
     "static/media/blank-image.PNG": "/static/media/blank-image.60cfc62dfa465bed9c24.PNG",
     "static/media/SpeakBoble.svg": "/static/media/SpeakBoble.52d518f5696e3ab329bf36869a741871.svg",
-    "main.0db18080.css.map": "/static/css/main.0db18080.css.map",
-    "main.28d2b78a.js.map": "/static/js/main.28d2b78a.js.map",
+    "main.6612ade8.css.map": "/static/css/main.6612ade8.css.map",
+    "main.ff4d69cd.js.map": "/static/js/main.ff4d69cd.js.map",
     "787.9c793c4c.chunk.js.map": "/static/js/787.9c793c4c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0db18080.css",
-    "static/js/main.28d2b78a.js"
+    "static/css/main.6612ade8.css",
+    "static/js/main.ff4d69cd.js"
   ]
 }
