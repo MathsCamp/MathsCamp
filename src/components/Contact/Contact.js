@@ -5,9 +5,11 @@ import { Tree } from "react-bootstrap-icons";
 import { hotjar } from "react-hotjar";
 import Swal from "sweetalert2";
 import "./Contact.css";
+import { useTranslation } from 'react-i18next';
 
 export default function Contact() {
   const form = useRef();
+  const { t } = useTranslation();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -49,15 +51,15 @@ export default function Contact() {
         <Col md="8" lg="5" className="email-col">
           <div className="text-center email-text-div">
             <Tree size={30} color="#4D4D4D" />
-            <h1 className="welcome-h1">Send us an email</h1>
-            <p className="welcome-p">We would love to hear from you</p>
+            <h1 className="welcome-h1">{t('send us an email')}</h1>
+            <p className="welcome-p">{t('we would love to hear from you')}</p>
           </div>
           <Form ref={form} action="#" onSubmit={sendEmail}>
             <Form.Group className="mb-3">
               <Form.Control
                 type="text"
                 name="user_name"
-                placeholder="Your name"
+                placeholder={t('your name')}
                 size="md"
               />
             </Form.Group>
@@ -65,7 +67,7 @@ export default function Contact() {
               <Form.Control
                 type="email"
                 name="user_email"
-                placeholder="your@email.com"
+                placeholder={t('your@email.com')}
                 size="md"
               />
             </Form.Group>
@@ -76,7 +78,7 @@ export default function Contact() {
               <Form.Control
                 as="textarea"
                 name="message"
-                placeholder="Send us a message here :)"
+                placeholder={t('send us a message here :)')}
                 style={{ height: "130px" }}
               />
             </Form.Group>
@@ -86,7 +88,7 @@ export default function Contact() {
                 type="submit"
                 className="sub-btn email-btn"
               >
-                Submit
+                {t('submit')}
               </Button>
             </div>
           </Form>

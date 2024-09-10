@@ -7,8 +7,11 @@ import { Table, Image, Button } from "react-bootstrap";
 import { getMascotImage } from "../Utils";
 import UserInfoTable from "../UserInfoTable/UserInfoTable";
 import { GetPoints } from "./GetPoints";
+import { useTranslation } from 'react-i18next';
 
 export default function MyPage() {
+  const { t } = useTranslation();
+
   const [students_info, setStudentInfo] = useState([]);
 
   const [total_points, setTotal_points] = useState(0);
@@ -123,28 +126,28 @@ export default function MyPage() {
     <div className="ranking-user-container">
       <div className="ranking-user-info-col">
         <div className="ranking-h1-table">
-          <h1 className="ranking-user-welcome-h1">Here is your classroom ranking!</h1>
+          <h1 className="ranking-user-welcome-h1"> {t('here is your classroom ranking!')} </h1>
           <div className="button-row">
             <Button
               className="filter-bnt"
               id="today"
               onClick={() => getClassroom("today")}
             >
-              Today
+              {t('today')}
             </Button>
             <Button
               className="filter-bnt"
               id="week"
               onClick={() => getClassroom("week")}
             >
-              This week
+              {t('this week')}
             </Button>
             <Button
               className="filter-bnt"
               id="all_time"
               onClick={() => getClassroom("all_time")}
             >
-              All time
+              {t('all time')}
             </Button>
           </div>
           <div className="ranking-table-div">
@@ -152,14 +155,14 @@ export default function MyPage() {
               <thead className="thead-light ranking-table-header">
                 <tr>
                   <th scope="col" className="ranking-rank">
-                    RANK
+                  {t('RANK')}
                   </th>
                   <th scope="col" className="rank-mascot">
-                    MASCOT
+                  {t('MASCOT')}
                   </th>
-                  <th scope="col">NAME</th>
+                  <th scope="col">{t('NAME')}</th>
                   <th scope="col" className="ranking-points">
-                    POINTS
+                  {t('POINTS')}
                   </th>
                 </tr>
               </thead>
@@ -218,7 +221,7 @@ export default function MyPage() {
               className="user-mascot-img"
             />
           </div>
-          <h1 className="user-welcome-h1 user-info-h1"> Your strikes</h1>
+          <h1 className="user-welcome-h1 user-info-h1"> {t('your strikes')}</h1>
           <div className="table-div">
             <UserInfoTable
               total_points={total_points}

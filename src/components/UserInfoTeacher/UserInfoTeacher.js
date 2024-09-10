@@ -10,6 +10,7 @@ import { getTeacherImage } from "../Utils";
 import "./UserInfoTeacher.css";
 import { hotjar } from "react-hotjar";
 import { async } from "parse/lib/browser/Storage";
+import { useTranslation } from 'react-i18next';
 
 export default function UserInfo() {
   const [username, setUsername] = useState("");
@@ -20,6 +21,7 @@ export default function UserInfo() {
   const [correct_question_ids, setCorrectQuestionIds] = useState([]);
   const [correct_questions, setCorrectQuestions] = useState([]);
   const history = useHistory();
+  const { t } = useTranslation();
 
   const findCategories = async (id) => {
     const query = new Parse.Query("Progress");
@@ -110,12 +112,12 @@ export default function UserInfo() {
           <Col className="welcome-col">
             <div className="teacher-speaker-bubble-div">
               <h1 className="teacher-welcome">
-                Hey {}
+              {t('Hey')} {}
                 {username}!
               </h1>
               <h3 className="teacher-welcome">
-                Welcome back. <br />
-                Start practicing by selecting a category below.
+              {t('Welcome back.')} <br />
+              {t('Start practicing by selecting a category below.')}
               </h3>
             </div>
           </Col>

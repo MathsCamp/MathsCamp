@@ -6,10 +6,12 @@ import { useHistory } from "react-router";
 import Swal from "sweetalert2";
 import "./RequestReset.css";
 import { hotjar } from "react-hotjar";
+import { useTranslation } from 'react-i18next';
 
 export default function RequestReset() {
   const [email, setEmail] = useState("");
   const history = useHistory();
+  const { t } = useTranslation();
 
   const updateEmail = (e) => {
     setEmail(e.target.value);
@@ -19,18 +21,18 @@ export default function RequestReset() {
     try {
       await Parse.User.requestPasswordReset(email);
       Swal.fire({
-        title: "Succes!",
-        text: `Please check ${email} to proceed with password reset.`,
+        title: t('succes'),
+        text:  t('please check') + " " + `${email}` + t('to proceed'),
         icon: "success",
-        confirmButtonText: "OK",
+        confirmButtonText: t('ok'),
       });
       return true;
     } catch (error) {
       Swal.fire({
-        title: "Error!",
-        text: `An error occured while sending the recovery email: ${error.message}. Try again!`,
+        title: t('error'),
+        text: t('an error occured') + `${error.message}` + ". " +t('try again'),
         icon: "error",
-        confirmButtonText: "OK",
+        confirmButtonText: t('ok'),
       });
       return false;
     }
@@ -50,10 +52,10 @@ export default function RequestReset() {
       <Container className="email-container">
         <div className="text-center">
           <Tree size={30} color="#4D4D4D" />
-          <h1 className="reset-h1">Password recovery</h1>
+          <h1 className="reset-h1">{t('password recovery')}</h1>
           <p className="reset-p">
-            Enter the email connected to your account below and <br />
-            click send to recieve a password recovery email
+          {t('enter the email')} <br />
+          {t('click to send')}
           </p>
         </div>
         <Container className="form-container">
@@ -63,7 +65,7 @@ export default function RequestReset() {
                 <Form.Group controlId="formEmail" className="upperform">
                   <Form.Control
                     type="email"
-                    placeholder="Enter an email"
+                    placeholder={t('enter your email')}
                     onChange={updateEmail}
                   />
                 </Form.Group>
@@ -84,7 +86,7 @@ export default function RequestReset() {
         variant="primary"
         onClick={handleGoBack}
       >
-        Go back <ChevronRight />
+        {t('Gå tilbage')} <ChevronRight />
       </Button>
     </div>
   );

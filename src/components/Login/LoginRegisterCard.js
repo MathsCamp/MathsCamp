@@ -5,9 +5,11 @@ import { Container, Button, ButtonToolbar } from "react-bootstrap";
 import "./LoginRegisterCard.css";
 import "bootstrap/dist/css/bootstrap.css";
 import { hotjar } from "react-hotjar";
+import { useTranslation } from 'react-i18next';
 
 export default function LoginRegisterCard() {
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handleLogin = (e) => {
     e.preventDefault();
@@ -28,19 +30,19 @@ export default function LoginRegisterCard() {
       <div className="text-center">
         <Tree size={30} color="#4D4D4D" />
         <h1 className="login-register-h1">
-          Welcome to <br />
-          Maths Camp
+        {t('welcome to')} <br />
+        {t('mathscamp')}
         </h1>
-        <p className="login-register-p">Where exercising your brain is fun.</p>
+        <p className="login-register-p">{t('where exercising your brain is fun')}</p>
       </div>
       <ButtonToolbar className="btn-toolbar login-register-toolbar">
         <Button onClick={handleRegister} className="register-btn landing-btn">
-          Register
+        {t('register')}
           <br />
           <CardList size={70} />
         </Button>
         <Button onClick={handleLogin} className="login-btn landing-btn">
-          Log in
+        {t('login')}
           <br />
           <Key size={70} />
         </Button>

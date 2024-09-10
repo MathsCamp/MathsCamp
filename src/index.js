@@ -1,9 +1,10 @@
-import React from "react";
+import React, { Suspense } from "react"; // Import Suspense from React
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import Parse from "parse";
+import i18n from "./translation/i18n";
 
 Parse.serverURL = "https://parseapi.back4app.com/";
 Parse.initialize(
@@ -13,7 +14,10 @@ Parse.initialize(
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    {/* Add Suspense around the App component */}
+    <Suspense fallback={<div>Loading translations...</div>}>
+      <App />
+    </Suspense>
   </React.StrictMode>,
   document.getElementById("root")
 );

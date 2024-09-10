@@ -7,9 +7,11 @@ import Logo from "../../images/Logo/logo-postlogin.svg";
 import Parse from "parse";
 import { hotjar } from "react-hotjar";
 import "./NavbarPostlogin.css";
+import { useTranslation } from 'react-i18next';
 
 export default function NavbarPostlogin() {
   const history = useHistory();
+  const { t } = useTranslation();
 
   const logActivity = async () => {
     const user = Parse.User.current();
@@ -65,25 +67,25 @@ export default function NavbarPostlogin() {
             className="btn-primary lg ranking-btn-postlogin"
             onClick={handleRanking}
           >
-            Ranking <Trophy size={15} />
+            {t('ranking')} <Trophy size={15} />
           </Button>
           <Button
             className="btn-primary lg home-btn-postlogin"
             onClick={handleHome}
           >
-            Home <HouseDoor size={15} />
+            {t('Hjem')} <HouseDoor size={15} />
           </Button>
           <Button
             className="contact-link contact-btn"
             onClick={handleSendEmail}
           >
-            Contact <BsMailbox size={15} />
+            {t('contact')} <BsMailbox size={15} />
           </Button>
           <Button
             className="btn-primary lg logout-btn-postlogin"
             onClick={handleLogOut}
           >
-            Log out <DoorOpen size={15} />
+            {t('log out')} <DoorOpen size={15} />
           </Button>
         </div>
       </Col>

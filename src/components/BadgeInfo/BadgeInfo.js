@@ -9,11 +9,13 @@ import "./BadgeInfo.css";
 import Swal from "sweetalert2";
 import { getRewardImage } from "../Utils";
 import { hotjar } from "react-hotjar";
+import { useTranslation } from 'react-i18next';
 
 export default function BadgeInfo() {
   const history = useHistory();
   const [rewards, setRewards] = useState([]);
   const [owned_rewards, setStudentRewards] = useState([]);
+  const { t } = useTranslation();
 
   //Redirects the user to the frontpage
   const handleGoFrontpage = (e) => {
@@ -64,15 +66,15 @@ export default function BadgeInfo() {
         <div className="points-div">
           <Trophy color="#F2B84B" size={50} />
           <div className="header-circle">
-            <p className="top-point-text text-center">Badge Library</p>
+            <p className="top-point-text text-center">{t('badge library')}</p>
           </div>
         </div>
         <div>
           <Button className="go-quiz-btn" onClick={handleGoQuiz}>
-            Go to quiz <VscSmiley />
+          {t('go to quiz')} <VscSmiley />
           </Button>
           <Button className="filter-btn" onClick={handleGoFrontpage}>
-            Go to frontpage <BsChevronRight />
+          {t('go to frontpage')} <BsChevronRight />
           </Button>
         </div>
       </div>

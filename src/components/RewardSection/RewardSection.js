@@ -8,11 +8,13 @@ import { getRewardImage } from "../Utils";
 import Parse from "parse";
 import "./RewardSection.css";
 import { hotjar } from "react-hotjar";
+import { useTranslation } from "react-i18next";
 
 export default function RewardSection() {
   const [description, setDescription] = useState("");
   const [imgsrc, setImage] = useState("");
   const history = useHistory();
+  const { t } = useTranslation();
 
   //Redirects the user to the page they were on when winning the badge
   const handleGoBack = (e) => {
@@ -66,13 +68,13 @@ export default function RewardSection() {
         </Col>
         <Col className="text-div">
           <h2 className="h2-reward">
-            Congratulations! <br /> You earned a badge
+            {t("Congratulations!")} <br /> {t("You earned a badge")}
           </h2>
           <p className="p-reward">
-            You earned your badge for this task:
+            {t("You earned your badge for this task:")}
             <br /> <b>{description} </b> <Trophy className="trophy-icon" />{" "}
             <br />
-            You also earned 50 points! Good job!
+            {t("You also earned 50 points! Good job!")}
             <br />
           </p>
           <div className="button-div ">
@@ -80,13 +82,13 @@ export default function RewardSection() {
               className="practice-again-btn quiz_btn"
               onClick={handleCollection}
             >
-              See collection <VscSmiley className="btn-icon" />
+              {t("See collection")} <VscSmiley className="btn-icon" />
             </Button>
             <Button
               className="go-collection-btn quiz_btn"
               onClick={handleGoBack}
             >
-              Go back <BsChevronRight className="btn-icon" />
+              {t("go back")} <BsChevronRight className="btn-icon" />
             </Button>
           </div>
         </Col>

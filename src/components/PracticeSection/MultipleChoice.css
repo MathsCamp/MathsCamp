@@ -218,7 +218,7 @@
 
 .next-btn,
 .next-btn:not(:disabled) {
-  width: 189px;
+  width: 200px;
   height: 48px;
   background-color: #7c7ef2;
   border-color: #7c7ef2;

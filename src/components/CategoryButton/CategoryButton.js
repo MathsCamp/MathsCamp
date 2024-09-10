@@ -4,9 +4,11 @@ import { Button } from "react-bootstrap";
 import "./CategoryButton.css";
 import { BsFillFilterSquareFill } from "react-icons/bs";
 import { useHistory } from "react-router";
+import { useTranslation } from 'react-i18next';
 
 export default function CategoryButton({ category, level, correct_answers }) {
   const history = useHistory();
+  const { t } = useTranslation();
 
   const logActivity = async () => {
     const user = Parse.User.current();
@@ -39,7 +41,7 @@ export default function CategoryButton({ category, level, correct_answers }) {
         <div className="level-div">{level}</div>
       </div>
       <div className="right-div">
-        <p> {correct_answers}/7 questions answered!</p>
+        <p> {correct_answers}{t('/7 questions answered!')}</p>
         <div className="progressbar-div">
           <div
             className="progressbar"

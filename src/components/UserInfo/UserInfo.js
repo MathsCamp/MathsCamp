@@ -7,6 +7,7 @@ import { BsPerson } from "react-icons/bs";
 import { getMascotImage } from "../Utils";
 import "./UserInfo.css";
 import { hotjar } from "react-hotjar";
+import { useTranslation } from 'react-i18next';
 
 export default function UserInfo() {
   const [isOpen, setIsOpen] = useState(true);
@@ -17,6 +18,7 @@ export default function UserInfo() {
   const [total_answered_questions, setTotal_answered_questions] = useState(0);
   const [active_mascot_index, setActiveMascotIndex] = useState(24);
   const history = useHistory();
+  const { t } = useTranslation();
 
   const handlePractice = (e) => {
     e.preventDefault();
@@ -84,19 +86,19 @@ export default function UserInfo() {
       <div className="user-info-col">
         <div>
           <h1 className="user-welcome-h1">
-            Welcome {}
+          {t('Welcome')} {}
             {username}!
           </h1>
         </div>
         <div>
           <p className="user-p">
-            Start practicing your math skills to earn points and badges
+          {t('Start practicing your math skills to earn points and badges')}
           </p>
         </div>
         <div className="card-mascot-div">
           <div className="card-div">
             <Button onClick={handlePractice} className="user-practice-btn">
-              Start practice
+            {t('Start practice')}
             </Button>
           </div>
           <div className="user-mascot-div">
@@ -110,7 +112,7 @@ export default function UserInfo() {
               variant="primary"
               type="submit"
             >
-              Change your mascot <BsPerson />
+              {t('Change your mascot')} <BsPerson />
             </Button>
           </div>
         </div>

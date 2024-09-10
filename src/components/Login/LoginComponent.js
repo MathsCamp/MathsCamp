@@ -6,11 +6,14 @@ import Parse from "parse";
 import Swal from "sweetalert2";
 import "./LoginComponent.css";
 import { hotjar } from "react-hotjar";
+import { useTranslation } from 'react-i18next';
 
 export default function LoginComponent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const history = useHistory();
+
+  const { t } = useTranslation();
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -65,30 +68,30 @@ export default function LoginComponent() {
     <Container className="login-container">
       <div className="text-center">
         <Tree size={30} color="#4D4D4D" />
-        <h1 className="welcome-h1">Welcome back!</h1>
-        <p className="welcome-p">Log in to play</p>
+        <h1 className="welcome-h1"> {t('welcome back')} </h1>
+        <p className="welcome-p"> {t('log in to play')} </p>
       </div>
       <Container className="form-container">
         <Row>
           <Col>
             <Form onSubmit={handleLogUser}>
               <Form.Group controlId="formUserName" className="upperform">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>{t('username')}</Form.Label>
                 <Form.Control
                   type="name"
-                  placeholder="Enter your username"
+                  placeholder={t('enter your username')}
                   onChange={updateUsername}
                 />
               </Form.Group>
               <Form.Group controlId="formPassword" className="upperform">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>{t('password')}</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Enter your password"
+                  placeholder={t('enter your password')}
                   onChange={updatePassword}
                 />
                 <p className="forgot-text" onClick={handleResetPassword}>
-                  Forgot your password? Click me!
+                {t('forgot password')}
                 </p>
               </Form.Group>
               <Button className="login-button" variant="primary" type="submit">

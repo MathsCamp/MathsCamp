@@ -8,6 +8,7 @@ import { useHistory } from "react-router";
 import { getMascotImage } from "../Utils";
 import { getRewardImage } from "../Utils";
 import UserInfoTable from "../UserInfoTable/UserInfoTable";
+import { useTranslation } from 'react-i18next';
 
 export default function Sidebar() {
   const [rewards, setRewards] = useState([]);
@@ -21,6 +22,7 @@ export default function Sidebar() {
   const [total_answered_questions, setTotal_answered_questions] = useState(0);
   const [active_mascot_index, setActiveMascotIndex] = useState(24);
   const history = useHistory();
+  const { t } = useTranslation();
 
   const fetchRewards = async () => {
     const Rewards = new Parse.Object.extend("Reward");
@@ -80,10 +82,10 @@ export default function Sidebar() {
     } else {
       console.log("The user couldn't be retrieved");
       Swal.fire({
-        title: "Oops, something went wrong!",
-        text: "Please try to refresh the page",
+        title: t('Oops, something went wrong!'),
+        text: t('Please try to refresh the page'),
         icon: "error",
-        confirmButtonText: "OK",
+        confirmButtonText: t('ok'),
       });
     }
   };
@@ -158,13 +160,13 @@ export default function Sidebar() {
             variant="primary"
             type="submit"
           >
-            Change mascot!
+            {t('Change mascot!')}
           </Button>
         </div>
       </div>
       <div className="user-strike-div">
         <div className="user-strike-h2-div">
-          <h2 className="user-strike-h2-sb">Your strikes!</h2>
+          <h2 className="user-strike-h2-sb">{t('your strikes')}</h2>
         </div>
         <div className="table-div">
           <UserInfoTable
@@ -179,13 +181,13 @@ export default function Sidebar() {
       {hasWonReward ? (
         <div className="text-center reward_container">
           <p className="reward_message">
-            Congratulations! You have won a reward, check it out!
+          {t('Congratulations! You have won a reward, check it out!')}
           </p>
           <Button className="see_reward_btn" onClick={handleSeeReward}>
-            See reward <BsTrophy />
+          {t('See reward')}<BsTrophy />
           </Button>
           <Button className="close_btn" onClick={handleClose}>
-            Close <BsX size={21} />
+          {t('close')} <BsX size={21} />
           </Button>
         </div>
       ) : (
@@ -193,11 +195,11 @@ export default function Sidebar() {
       )}
       <div className="user-bagde-div">
         <div className="user-badge-h2-div">
-          <h2 className="user-badge-h2-sb">Recent earned badges</h2>
+          <h2 className="user-badge-h2-sb">{t('Recent earned badges')}</h2>
         </div>
         <div className="show-bagde-div">
           <span className="pointer-cursor" onClick={handleSeeBadgePage}>
-            Click to see all your bagdes!
+          {t('Click to see all your badges!')}
           </span>
         </div>
         <div className="badge-col text-center" style={{}}>

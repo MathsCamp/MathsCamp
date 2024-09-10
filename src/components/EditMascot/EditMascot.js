@@ -8,6 +8,7 @@ import Swal from "sweetalert2";
 import Parse from "parse";
 import "./EditMascot.css";
 import { hotjar } from "react-hotjar";
+import { useTranslation } from "react-i18next";
 
 export default function EditMascot() {
   const history = useHistory();
@@ -16,6 +17,7 @@ export default function EditMascot() {
   const [active_mascot_id, setActiveMascotId] = useState("");
   const [total_points, setTotalPoints] = useState(0);
   const [total_coins, setTotalCoins] = useState(0);
+  const { t } = useTranslation();
 
   //Redirects the user to the frontpage
   const handleGoBack = () => {
@@ -90,8 +92,8 @@ export default function EditMascot() {
       }
     } else {
       Swal.fire({
-        title: "You don't have enough points to buy this mascot!",
-        text: "You can earn more points by answering math questions",
+        title: t('you dont have enough points to buy this mascot!'),
+        text: t('you can earn more points by answering math questions'),
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -143,7 +145,7 @@ export default function EditMascot() {
         </div>
         <div>
           <Button className="go-back-btn" onClick={handleGoBack}>
-            Go back <BsChevronRight />
+            {t('go back')} <BsChevronRight />
           </Button>
         </div>
       </div>
@@ -172,14 +174,14 @@ export default function EditMascot() {
                 </Card.Title>
                 <Card.Text className="point-text">
                   <BsCoin color="#28A3EE" /> {mascot.attributes.required_points}{" "}
-                  Coins
+                  {t('coins')}
                 </Card.Text>
                 <div>
                   {owned_mascot_ids.includes(mascot.id) ? (
                     [
                       active_mascot_id === mascot.id ? (
                         <div key={mascot.id} className="active-mascot-btn">
-                          Your mascot
+                          {t('your mascot')}
                         </div>
                       ) : (
                         <Button
@@ -188,7 +190,7 @@ export default function EditMascot() {
                           variant="primary"
                           onClick={() => pickMascot(mascot.id)}
                         >
-                          Pick mascot <Person />
+                          {t('pick mascot')} <Person />
                         </Button>
                       ),
                     ]
@@ -206,7 +208,7 @@ export default function EditMascot() {
                         )
                       }
                     >
-                      Buy mascot <BsCoin />
+                      {t('buy mascot')} <BsCoin />
                     </Button>
                   )}
                 </div>
@@ -217,7 +219,7 @@ export default function EditMascot() {
       </Row>
       <div className="go-back-btn-container">
         <Button className="go-back-btn" onClick={handleGoBack}>
-          Go back <BsChevronRight />
+        {t('go back')} <BsChevronRight />
         </Button>
       </div>
     </Container>

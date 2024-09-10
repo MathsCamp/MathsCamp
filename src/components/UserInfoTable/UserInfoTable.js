@@ -8,6 +8,7 @@ import {
   BsTrophy,
   BsCoin,
 } from "react-icons/bs";
+import { useTranslation } from "react-i18next";
 
 export default function UserInfoTable({
   total_points,
@@ -16,15 +17,16 @@ export default function UserInfoTable({
   total_answered_questions,
   total_rewards,
 }) {
+  const { t } = useTranslation();
   return (
     <Table>
       <thead className="thead-light table-header">
         <tr>
           <th scope="col" className="table-header">
-            CATEGORY
+          {t('CATEGORY')}
           </th>
           <th scope="col" className="table-header-amount">
-            AMOUNT
+          {t('AMOUNT')}
           </th>
         </tr>
       </thead>
@@ -36,10 +38,10 @@ export default function UserInfoTable({
               className="category-icon"
               color={"#F2B84B"}
             />
-            Days played
+            {t('Days played')}
           </td>
           <td data-label="Days played" className="body-text">
-            {active_days} days
+            {active_days} {t('days')}
           </td>
         </tr>
         <tr>
@@ -49,25 +51,25 @@ export default function UserInfoTable({
               className="category-icon"
               color={"#FF6665"}
             />
-            Questions answered
+            {t('Questions answered')}
           </td>
           <td data-label="Questions you answered" className="body-text">
-            <span>{total_answered_questions} questions</span>
+            <span>{total_answered_questions} {t('questions')}</span>
           </td>
         </tr>
         <tr>
           <td className="body-text">
             <BsGem size={25} className="category-icon" color={"#47B0F1"} />
-            Points
+            {t('Points')}
           </td>
           <td data-label="Your points" className="body-text">
-            <span>{total_points} points</span>
+            <span>{total_points} {t('points')}</span>
           </td>
         </tr>
         <tr>
           <td className="body-text">
             <BsTrophy size={25} className="category-icon" color={"#F2B84B"} />
-            Badges
+            {t('Badges')}
           </td>
           <td>
             <span>{total_rewards}</span>
@@ -76,10 +78,12 @@ export default function UserInfoTable({
         <tr>
           <td className="body-text">
             <BsCoin size={25} className="category-icon" color={"#28A3EE"} />
-            Your Coins
+            {t('Your Coins')}
           </td>
           <td data-label="Your coins" className="body-text">
-            <span>{total_coins} coins</span>
+            <span>
+              {total_coins} {t("coins")}
+            </span>
           </td>
         </tr>
       </tbody>

@@ -8,9 +8,12 @@ import { hotjar } from "react-hotjar";
 import Parse from "parse";
 import Logo from "../../images/Logo/logo-prelogin.svg";
 import "./NavbarPracticeMode.css";
+import { useTranslation } from 'react-i18next';
+
 
 export default function NavbarPracticeMode() {
   const history = useHistory();
+  const { t } = useTranslation();
 
   const logActivity = async () => {
     const user = Parse.User.current();
@@ -63,22 +66,22 @@ export default function NavbarPracticeMode() {
             className="btn-primary lg ranking-btn-postlogin"
             onClick={handleRanking}
           >
-            Ranking <Trophy size={15} />
+            {t('ranking')}<Trophy size={15} />
           </Button>
           <Button className="btn-primary lg home-btn" onClick={handleHome}>
-            Home <HouseDoor size={15} />
+          {t('Hjem')} <HouseDoor size={15} />
           </Button>
           <Button
             className="contact-link contact-btn"
             onClick={handleSendEmail}
           >
-            Contact <BsMailbox size={15} />
+            {t('contact')} <BsMailbox size={15} />
           </Button>
           <Button
             className="btn-primary lg logout-btn-postlogin"
             onClick={handleLogOut}
           >
-            Log out <DoorOpen size={15} />
+            {t('log out')} <DoorOpen size={15} />
           </Button>
         </div>
       </Col>

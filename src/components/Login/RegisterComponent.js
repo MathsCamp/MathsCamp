@@ -6,6 +6,8 @@ import Parse from "parse";
 import Swal from "sweetalert2";
 import "./RegisterComponent.css";
 import { hotjar } from "react-hotjar";
+import { useTranslation } from 'react-i18next';
+
 
 export default function RegisterComponent() {
   const [username, setUsername] = useState("");
@@ -13,6 +15,7 @@ export default function RegisterComponent() {
   const [email, setEmail] = useState("");
   const [classroomid, setClassroomid] = useState("");
   const history = useHistory();
+  const { t } = useTranslation();
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -58,8 +61,8 @@ export default function RegisterComponent() {
     e.preventDefault();
     if (password === "" || username === "") {
       Swal.fire({
-        title: "Oops!",
-        text: "You need to fill out a username and password",
+        title: t('oops!'),
+        text: t('you need to fill out a username and password'),
         icon: "error",
         confirmButtonText: "OK",
       });
@@ -120,51 +123,51 @@ export default function RegisterComponent() {
     <Container className="login-container">
       <div className="text-center">
         <Tree size={30} color="#4D4D4D" />
-        <h1 className="register-h1">Welcome!</h1>
-        <p className="register-p">Create a user and play today</p>
+        <h1 className="register-h1">{t('welcome!')}</h1>
+        <p className="register-p">{t('create a user and play today')}</p>
       </div>
       <Container className="form-container">
         <Row>
           <Col>
             <Form onSubmit={handleReg}>
               <Form.Group controlId="formUserName" className="upperform">
-                <Form.Label>Username</Form.Label>
+                <Form.Label>{t('username')}</Form.Label>
                 <Form.Control
                   type="name"
-                  placeholder="Enter a username"
+                  placeholder={t('enter an email')}
                   onChange={updateUsername}
                 />
               </Form.Group>
               <Form.Group controlId="formPassword" className="upperform">
-                <Form.Label>Password</Form.Label>
+                <Form.Label>{t('password')}</Form.Label>
                 <Form.Control
                   type="password"
-                  placeholder="Enter a password"
+                  placeholder={t('enter a password')}
                   onChange={updatePassword}
                 />
               </Form.Group>
               <Form.Group controlId="formEmail" className="upperform">
-                <Form.Label>Parental email (optional)</Form.Label>
+                <Form.Label>{t('parental email (optional)')}</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="Enter an email"
                   onChange={updateEmail}
                 />
                 <p className="information-text">
-                  This email will be used for password recovery
+                {t('this email will be used for password recovery')}
                 </p>
               </Form.Group>
               <Form.Group controlId="formClassroom" className="upperform">
-                <Form.Label>Classroom code</Form.Label>
+                <Form.Label>{t('classroom code')} </Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Enter classcode given by teacher"
+                  placeholder={t('enter classcode given by teacher')}
                   onChange={updateClassroom}
                 />
-                <p className="information-text">If no class type: noClass</p>
+                <p className="information-text">{t('if no class type noClass')}</p>
               </Form.Group>
               <Button className="registerbtn" variant="primary" type="submit">
-                Register <CardList />
+              {t('register')} <CardList />
               </Button>
             </Form>
           </Col>
