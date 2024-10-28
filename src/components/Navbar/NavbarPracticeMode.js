@@ -66,10 +66,10 @@ export default function NavbarPracticeMode() {
             className="btn-primary lg ranking-btn-postlogin"
             onClick={handleRanking}
           >
-            {t('ranking')}<Trophy size={15} />
+            {t('ranking')} <Trophy size={15} />
           </Button>
           <Button className="btn-primary lg home-btn" onClick={handleHome}>
-          {t('Hjem')} <HouseDoor size={15} />
+          {t('home')} <HouseDoor size={15} />
           </Button>
           <Button
             className="contact-link contact-btn"

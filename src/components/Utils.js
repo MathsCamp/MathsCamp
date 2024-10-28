@@ -48,6 +48,12 @@ import Badge22 from "../images/Rewards/helmet-man.png";
 import Badge23 from "../images/Rewards/coffee.png";
 import Badge24 from "../images/Rewards/love-letter.png";
 import Badge25 from "../images/Rewards/calculator-badge.png";
+import Badge26 from "../images/Rewards/TiktokBadge.png";
+import Badge27 from "../images/Rewards/FortniteBadge.png";
+import Badge28 from "../images/Rewards/legoBadge.png";
+import Badge29 from "../images/Rewards/FodboldBadge.png";
+import Badge30 from "../images/Rewards/RobloxBadge.png";
+import Badge31 from "../images/Rewards/SodedyrBadge.png";
 import Teacher from "../images/Teacher/teacher.png";
 import Swal from "sweetalert2";
 
@@ -213,6 +219,24 @@ export const getRewardImage = (index) => {
     }
     case 24: {
       return Badge25;
+    }
+    case 25:{
+      return Badge26;
+    }
+    case 26:{
+      return Badge27;
+    }
+    case 27:{
+      return Badge28;
+    }
+    case 28:{
+      return Badge29;
+    }
+    case 29:{
+      return Badge30;
+    }
+    case 30:{
+      return Badge31;
     }
     default:
       console.log("The mascot images cannot be loaded");

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import "./RegisterComponent.css";
 import { hotjar } from "react-hotjar";
 import { useTranslation } from 'react-i18next';
+import { currentLanguageCode } from "../../App";
 
 
 export default function RegisterComponent() {
@@ -41,15 +42,58 @@ export default function RegisterComponent() {
   const generateProgressTables = async (u) => {
     const query = new Parse.Query("Category");
     let categories = await query.find();
-
+  
     for (let i = 0; i < categories.length; i++) {
+      const categoryName = categories[i].get("name");
       const progressTable = new Parse.Object("Progress");
       progressTable.set("user_id", u.id);
-      progressTable.set("category_name", categories[i].get("name"));
+      progressTable.set("category_name", categoryName);
       progressTable.set("correct_question_ids", []);
+  
+      // Set the translationId based on the category name
+      let translationId;
+      switch (categoryName) {
+        case 'measurement':
+          translationId = 'da8048cd-e329-40bb-a97c-39de48f5f145';
+          break;
+        case 'number':
+          translationId = '7713ddd5-44c1-4de1-a466-a4fc38393a2e';
+          break;
+        case 'geometry':
+          translationId = 'dd60705c-94da-4891-9257-0f47d49c5d93';
+          break;
+        case 'algebra':
+          translationId = 'cd8dadd3-1ab1-4222-a450-bdf1c5a6dd53';
+          break;
+        default:
+          translationId = null; // Handle unexpected category names if needed
+          break;
+      }
+  
+      if (translationId) {
+        progressTable.set("translationId", translationId);
+      }
+  
       await progressTable.save();
     }
   };
+
+  // Creating rows in the progress table in the same manner as the categories
+  const generateThemeTables = async (u) =>{
+    const query = new Parse.Query("Themes");
+    query.equalTo("languageId", currentLanguageCode);
+    let themes = await query.find();
+
+    console.log("-- Themes", themes)
+
+    for (let i = 0; i < themes.length; i++) {
+      const progressTable = new Parse.Object("Progress");
+      progressTable.set("user_id", u.id);
+      progressTable.set("category_name", themes[i].get("name"));
+      progressTable.set("correct_question_ids", []);
+      await progressTable.save();
+    }
+  }
 
   const getRandomInt = (max) => {
     return Math.floor(Math.random() * max);
@@ -100,6 +144,7 @@ export default function RegisterComponent() {
           console.log(error);
         });
       await generateProgressTables(user);
+      await generateThemeTables(user); // Calling the generateThemeTables function
       history.push("/frontpage");
     } catch (error) {
       Swal.fire({

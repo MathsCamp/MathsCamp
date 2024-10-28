@@ -24,7 +24,8 @@ import { getTeacherImage } from "../Utils";
 import SpeakBoble from "../../images/Icons/SpeakBoble.svg";
 import "./MultipleChoice.css";
 import { hotjar } from "react-hotjar";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { currentLanguageCode } from "../../App";
 
 import { updatePointsOnCorrectAnswer } from "../../db/submittingAnswers";
 import { registerPoints } from "../../db/submittingPoints";
@@ -53,29 +54,27 @@ export default function MultipleChoice() {
   const [motivationMessage, setMotivationMessage] = useState("");
   const [motivationH1, setMotivationH1] = useState("");
   const motivationH1Correct = [
-    t('Correct!'),
-    t('Well done!'),
-    t('Impressive,'),
-    t('Super!'),
-    t('Outstanding,'),
-    t('Excellent'),
-    t('Cool!'),
-    t('Groovy,')
+    t("Correct!"),
+    t("Well done!"),
+    t("Impressive,"),
+    t("Super!"),
+    t("Outstanding,"),
+    t("Excellent"),
+    t("Cool!"),
+    t("Groovy,"),
   ];
   const correctMotivation = [
-    t("Youre a true math master. Lets do another question"),
-    t("You are doing so great! Keep on going"),
+    t("Youre a true math master. Lets do another question."),
+    t("You are doing so great! Keep on going."),
   ];
+  
   const wrongMotivation = [
     t("That wasnt quite right. Take a look at the explanation."),
     t("Math can be hard. Try taking a look at the explanation."),
     t("You still got this! Take a look at the explanation and keep going."),
   ];
-  const motivationH1Wrong = [
-    t("Woops!"),
-    t("Oh well.."),
-    t("Next time!"),
-  ];
+
+  const motivationH1Wrong = [t("Woops!"), t("Oh well.."), t("Next time!")];
   const [active_mascot_index, setActiveMascotIndex] = useState(24);
   const [hasOptionFraction, setHasOptionFraction] = useState(false);
   const history = useHistory();
@@ -89,8 +88,8 @@ export default function MultipleChoice() {
   const fetchQuestion = async (info) => {
     var activeMascotIndex = await fetchMascots(info.activeMascotId);
     setActiveMascotIndex(activeMascotIndex);
-    const student = Parse.User.current();
 
+    const student = Parse.User.current();
     const Progress = Parse.Object.extend("Progress");
     const query = new Parse.Query(Progress);
 
@@ -100,9 +99,14 @@ export default function MultipleChoice() {
     const progressTable = res[0];
     const progressLevel = progressTable.get("current_level");
     const answeredQuestions = progressTable.get("correct_question_ids");
+    
     const questionQuery = new Parse.Query("Questions");
     questionQuery.equalTo("category", info.category);
     questionQuery.equalTo("level", progressLevel);
+
+    // Adds language filter
+    questionQuery.equalTo("languageId", '02');
+    
     try {
       let question = await questionQuery.find();
       let foundQuestion = false;
@@ -111,21 +115,25 @@ export default function MultipleChoice() {
         const currentId = question[i].id;
         /* Checking if the question has been answered */
         if (!answeredQuestions.includes(currentId)) {
+
           const correct_answer = question[i].get("correct_answer");
-          console.log(correct_answer);
           const description = question[i].get("description");
           const options = question[i].get("options");
           const hint = question[i].get("hint");
           const explanation = question[i].get("explanation");
+          
           if (question[i].get("question_image")) {
             const questionImageURL = question[i].get("question_image")._url;
             setQuestionImage(questionImageURL);
+            console.log("IMAGE ",questionImageURL)
           } else setQuestionImage("No image for this question.");
+          
           if (question[i].get("explanation_image")) {
             const explanationImageURL =
               question[i].get("explanation_image")._url;
             setExplanationImage(explanationImageURL);
           }
+          
           if (options[0].includes("/frac")) {
             setHasOptionFraction(true);
             let regex = /{([^}]+)}/g;
@@ -176,10 +184,10 @@ export default function MultipleChoice() {
     } catch (error) {
       console.log(error.message);
       Swal.fire({
-        title: t('Oops, something went wrong!'),
-        text: t('Please try to refresh the page'),
+        title: t("Oops, something went wrong!"),
+        text: t("Please try to refresh the page"),
         icon: "error",
-        confirmButtonText: t('ok'),
+        confirmButtonText: t("ok"),
       });
     }
   };
@@ -211,10 +219,10 @@ export default function MultipleChoice() {
     } catch (e) {
       console.log("The user couldn't be retrieved " + e.message);
       Swal.fire({
-        title: t('Oops, something went wrong!'),
-        text: t('Please try to refresh the page'),
+        title: t("Oops, something went wrong!"),
+        text: t("Please try to refresh the page"),
         icon: "error",
-        confirmButtonText: t('ok'),
+        confirmButtonText: t("ok"),
       });
     }
   };
@@ -290,12 +298,12 @@ export default function MultipleChoice() {
           registerPoints(student.id, get_bagde_point_reward);
 
           Swal.fire({
-            title: t('Yay! You earned a badge!'),
-            text: t('Take a look at the badge you earned'),
+            title: t("Yay! You earned a badge!"),
+            text: t("Take a look at the badge you earned"),
             icon: "success",
             showDenyButton: true,
-            confirmButtonText: t('see badge'),
-            denyButtonText: t('close'),
+            confirmButtonText: t("see badge"),
+            denyButtonText: t("close"),
           }).then((result) => {
             if (result.isConfirmed) {
               history.push("/reward");
@@ -336,11 +344,11 @@ export default function MultipleChoice() {
 
   const categoryCompleteNotification = () => {
     Swal.fire({
-      title: t('congrats! You finished') + category + "!",
+      title: t("congrats! You finished") + category + "!",
       text:
-      t('you have answered all the questions in the') +
+        t("you have answered all the questions in the") +
         category +
-        t('lets take another round'),
+        t("lets take another round"),
       icon: "success",
       confirmButtonText: "OK",
     });
@@ -393,13 +401,13 @@ export default function MultipleChoice() {
           if (correct.length === 7) {
             if (currentLevel === 3) {
               Swal.fire({
-                title: t('congrats! You finished') + category + "!",
+                title: t("congrats! You finished") + category + "!",
                 text:
-                t('you have answered all the questions in the') +
+                  t("you have answered all the questions in the") +
                   category +
-                  t('lets take another round'),
+                  t("lets take another round"),
                 icon: "success",
-                confirmButtonText: t('ok'),
+                confirmButtonText: t("ok"),
               });
             } else {
               progressTable.increment("current_level");
@@ -433,12 +441,12 @@ export default function MultipleChoice() {
             student.set("total_points", total_points + get_bagde_point_reward);
             registerPoints(student.id, get_bagde_point_reward);
             Swal.fire({
-              title: t('yay! You won a badge!'),
-              text: t('click OK to see your badge'),
+              title: t("yay! You won a badge!"),
+              text: t("click OK to see your badge"),
               icon: "success",
               showDenyButton: true,
-              confirmButtonText: t('ok'),
-              denyButtonText: t('close'),
+              confirmButtonText: t("ok"),
+              denyButtonText: t("close"),
             }).then((result) => {
               if (result.isConfirmed) {
                 history.push("/reward");
@@ -460,12 +468,12 @@ export default function MultipleChoice() {
             student.set("coins", originalCoins + get_bagde_coins_reward);
             registerPoints(student.id, get_bagde_point_reward);
             Swal.fire({
-              title: t('yay! You won a badge!'),
-              text: t('click OK to see your badge'),
+              title: t("yay! You won a badge!"),
+              text: t("click OK to see your badge"),
               icon: "success",
               showDenyButton: true,
-              confirmButtonText: t('ok'),
-              denyButtonText: t('close'),
+              confirmButtonText: t("ok"),
+              denyButtonText: t("close"),
             }).then((result) => {
               if (result.isConfirmed) {
                 history.push("/reward");
@@ -491,12 +499,12 @@ export default function MultipleChoice() {
             student.set("coins", originalCoins + get_bagde_coins_reward);
             registerPoints(student.id, get_bagde_point_reward);
             Swal.fire({
-              title: t('yay! You won a badge!'),
-              text: t('click OK to see your badge'),
+              title: t("yay! You won a badge!"),
+              text: t("click OK to see your badge"),
               icon: "success",
               showDenyButton: true,
-              confirmButtonText: t('ok'),
-              denyButtonText: t('close'),
+              confirmButtonText: t("ok"),
+              denyButtonText: t("close"),
             }).then((result) => {
               if (result.isConfirmed) {
                 history.push("/reward");
@@ -511,10 +519,10 @@ export default function MultipleChoice() {
     } catch (error) {
       console.log(`Error! ${error.message}`);
       Swal.fire({
-        title: t('Oops, something went wrong!'),
-        text: t('Please try to refresh the page'),
+        title: t("Oops, something went wrong!"),
+        text: t("Please try to refresh the page"),
         icon: "error",
-        confirmButtonText: t('ok'),
+        confirmButtonText: t("ok"),
       });
     }
   };
@@ -524,10 +532,12 @@ export default function MultipleChoice() {
       input: "textarea",
       inputLabel: "Feedback",
       inputPlaceholder:
-      t('we would love to hear your thoughts') + "\n" + t('write your feedback here!'),
-      confirmButtonText: t('submit'),
+        t("we would love to hear your thoughts") +
+        "\n" +
+        t("write your feedback here!"),
+      confirmButtonText: t("submit"),
       inputAttributes: {
-        "aria-label": t('type here'),
+        "aria-label": t("type here"),
       },
       showCancelButton: true,
     });
@@ -639,7 +649,18 @@ export default function MultipleChoice() {
             </h5>
             <div className="category-h1">
               {category ? (
-                <h1>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
+                <h1>
+                  {category.toLowerCase() === "measurement"
+                    ? "Måling"
+                    : category.toLowerCase() === "algebra"
+                    ? "Algebra"
+                    : category.toLowerCase() === "geometry"
+                    ? "Geometri"
+                    : category.toLowerCase() === "number"
+                    ? "Tal"
+                    : category.charAt(0).toLocaleUpperCase() +
+                      category.slice(1)}
+                </h1>
               ) : (
                 <></>
               )}
@@ -721,7 +742,9 @@ export default function MultipleChoice() {
                         style={{ display: showExplanation ? "" : "none" }}
                       >
                         <div className="explanation-text">
-                        {t('sorry, there is no explanation for this questions')}
+                          {t(
+                            "sorry, there is no explanation for this questions"
+                          )}
                         </div>
                       </div>
                     )
@@ -735,7 +758,7 @@ export default function MultipleChoice() {
                       className="expl-btn quiz-btn"
                       onClick={toggleExplanation}
                     >
-                      {t('explanation')}
+                      {t("explanation")}
                       <BsFileText className="btn-icon" />
                     </Button>
                     <Button
@@ -743,7 +766,7 @@ export default function MultipleChoice() {
                       onClick={refreshPage}
                       type="submit"
                     >
-                      {t('next question')}
+                      {t("next question")}
                       <BsChevronRight className="btn-icon" />
                     </Button>
                   </div>
@@ -754,7 +777,7 @@ export default function MultipleChoice() {
                         className="close-hint-btn quiz-btn"
                         onClick={toggleHint}
                       >
-                        {t('close hint')}
+                        {t("close hint")}
                         <BsLifePreserver className="btn-icon" />
                       </Button>
                     ) : (
@@ -762,7 +785,7 @@ export default function MultipleChoice() {
                         className="hint-btn quiz-btn"
                         onClick={toggleHint}
                       >
-                       {t('hint')}
+                        {t("hint")}
                         <BsLifePreserver className="btn-icon" />
                       </Button>
                     )}
@@ -772,7 +795,7 @@ export default function MultipleChoice() {
                       onClick={handleSubmit}
                       type="submit"
                     >
-                      {t('submit')} <BsCheckCircle className="btn-icon" />
+                      {t("submit")} <BsCheckCircle className="btn-icon" />
                     </Button>
                   </div>
                 )}
@@ -789,18 +812,16 @@ export default function MultipleChoice() {
                 </div>
               ) : (
                 <div className="speakboble-text">
-                  <h2>{t('sorry,')}</h2>
-                  <p>
-                  {t('theres no hint for this question.')}
-                  </p>
+                  <h2>{t("sorry,")}</h2>
+                  <p>{t("theres no hint for this question.")}</p>
                 </div>
               )}
             </div>
             <div style={{ display: showWarning ? "" : "none" }}>
               <Image src={SpeakBoble} className="speakboble" />
               <div className="speakboble-text">
-                <h2>{t('hold your horses!')}</h2>
-                <p>{t('you need to pick an option.')}</p>
+                <h2>{t("hold your horses!")}</h2>
+                <p>{t("you need to pick an option.")}</p>
               </div>
             </div>
             <div style={{ display: showMotivation ? "" : "none" }}>
@@ -816,7 +837,7 @@ export default function MultipleChoice() {
                 className="feedback-btn quiz-btn"
                 onClick={handleFeedback}
               >
-                {t('give feedback')}
+                {t("give feedback")}
               </Button>
             </div>
           </Col>

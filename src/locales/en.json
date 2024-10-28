@@ -5,6 +5,7 @@
   "badge library": "Badge Library",
   "go to quiz": "Go to quiz",
   "go to frontpage": "Go to frontpage",
+  "practice to get badges":"You do not have any badges yet. Practice to earn some!",
 
   "--- Break ---": "",
   "time to take a break": "Time to take a break.",
@@ -15,6 +16,12 @@
 
   "--- CategoryButton ---": "",
   "/7 questions answered!": "/7 questions answered!",
+  "/6 questions answered!": "/6 questions answered!",
+
+  "--- ThemeButton ---": "",
+  "start":"Start!",
+  "you have already completed this theme":"You have already completed this theme! You can play again, but you will not get any more rewards.",
+  "play again":"Play again",
 
   "--- Contact ---": "",
   "send us an email": "Send us an email",
@@ -76,7 +83,7 @@
   "Impressive,": "Impressive,",
   "Super!": "Super!",
   "Outstanding,": "Outstanding,",
-  "Excellent": "Excellent",
+  "Excellent": "Excellent", 
   "Cool!": "Cool!",
   "Groovy,": "Groovy,",
   "Youre a true math master. Lets do another question.": "You're a true math master. Let's do another question.",
@@ -111,6 +118,15 @@
   "hold your horses!": "Hold your horses!",
   "you need to pick an option.": "You need to pick an option.",
   "give feedback": "Give feedback",
+
+  "--- ThemePractice ---": "",
+  "type your answer here":"Type your answer here",
+  "you need to write an answer":"You need to write an answer",
+  "That wasnt quite right. Try to look at your calculations again.":"That wasnt quite right. Try to look at your calculations again.",
+  "Math can be hard, but you can do it. Try again.":"Math can be hard, but you can do it. Try again.",
+  "Not quite, but you still got this! Try again.":"Not quite, but you still got this! Try again.",
+  "badge":"Badge",
+  "collect and return to frontpage":"Collect and return to frontpage",
 
   "--- Ranking ---": "",
   "here is your classroom ranking!": "Here is your classroom ranking!",
@@ -170,8 +186,12 @@
 
   "--- UserInfoTeacher ---":"",
   "Hey":"Hey",
+  "New":"New",
+  "Themes":"Themes",
+  "Categories":"Categories",
   "Welcome back.":"Welcome back.",
   "Start practicing by selecting a category below.":"Start practicing by selecting a category below.",
+  "Choose a theme or a category to start":"Vælg et tema eller en kategori for at starte",
 
   "--- Footer ---": "",
   "created by": "Made by students at the IT-University of Copenhagen"

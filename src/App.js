@@ -1,4 +1,4 @@
-import { React, useEffect } from "react";
+import { React, useEffect, useState } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -12,28 +12,16 @@ import BadgeInfoPage from "./pages/BadgeInfoPage";
 import Break from "./pages/BreakPage";
 import ContactPage from "./pages/ContactPage";
 import Ranking from "./pages/Ranking";
+import ThemePage from "./pages/ThemePage"
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import "bootstrap/dist/css/bootstrap.css";
 import "@fontsource/rubik";
 import "@fontsource/solway";
 
+export let currentLanguageCode = '02'; //02 for danish and 01 for english
+
 function App() {
-  // Translation
-  const { i18n } = useTranslation();
-
-  const changeLanguage = (lng) => {
-    i18n.changeLanguage(lng); // Change language dynamically
-  };
-
-  useEffect(() => {
-    if (localStorage.getItem("i18nextLng")?.length > 2) {
-      i18next.changeLanguage("en");
-    }
-  }, []);
-  const handleLanguageChange = (e) => {
-    i18n.changeLanguage(e.target.value);
-  };
 
   return (
     <Router>
@@ -44,6 +32,7 @@ function App() {
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/frontpage" component={FrontPage} />
           <Route exact path="/practice" component={PracticePage} />
+          <Route exact path="/theme" component={ThemePage} />
           <Route exact path="/mascot" component={EditMascotPage} />
           <Route exact path="/reward" component={RewardPage} />
           <Route exact path="/requestReset" component={Request} />

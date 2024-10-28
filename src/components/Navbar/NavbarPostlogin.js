@@ -73,7 +73,7 @@ export default function NavbarPostlogin() {
             className="btn-primary lg home-btn-postlogin"
             onClick={handleHome}
           >
-            {t('Hjem')} <HouseDoor size={15} />
+            {t('home')} <HouseDoor size={15} />
           </Button>
           <Button
             className="contact-link contact-btn"

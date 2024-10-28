@@ -6,7 +6,7 @@ import { BsFillFilterSquareFill } from "react-icons/bs";
 import { useHistory } from "react-router";
 import { useTranslation } from 'react-i18next';
 
-export default function CategoryButton({ category, level, correct_answers }) {
+export default function CategoryButton({ category, categoryNameTranslated, level, correct_answers }) {
   const history = useHistory();
   const { t } = useTranslation();
 
@@ -37,7 +37,7 @@ export default function CategoryButton({ category, level, correct_answers }) {
           className="category-icon"
           color={"#FF6665"}
         />
-        {category}
+        {categoryNameTranslated}
         <div className="level-div">{level}</div>
       </div>
       <div className="right-div">

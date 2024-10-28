@@ -9,12 +9,15 @@ import "./BadgeInfo.css";
 import Swal from "sweetalert2";
 import { getRewardImage } from "../Utils";
 import { hotjar } from "react-hotjar";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
+import { fetchBatchTranslations } from "../../db/TranslationRepository";
+import { currentLanguageCode } from "../../App";
 
 export default function BadgeInfo() {
   const history = useHistory();
   const [rewards, setRewards] = useState([]);
   const [owned_rewards, setStudentRewards] = useState([]);
+  const [translations, setTranslations] = useState({});
   const { t } = useTranslation();
 
   //Redirects the user to the frontpage
@@ -31,8 +34,20 @@ export default function BadgeInfo() {
   const fetchRewards = async () => {
     const Rewards = new Parse.Object.extend("Reward");
     const query = new Parse.Query(Rewards);
+    query.containedIn("languageId", [currentLanguageCode, "any"]);
     const result = await query.find();
     setRewards(result);
+
+    // Extract translationIds to fetch translations
+    const translationIds = result.map((reward) => reward.get("description"));
+
+    if (translationIds.length > 0) {
+      const fetchedTranslations = await fetchBatchTranslations(
+        translationIds,
+        currentLanguageCode
+      );
+      setTranslations(fetchedTranslations);
+    }
   };
 
   useEffect(() => {
@@ -66,15 +81,12 @@ export default function BadgeInfo() {
         <div className="points-div">
           <Trophy color="#F2B84B" size={50} />
           <div className="header-circle">
-            <p className="top-point-text text-center">{t('badge library')}</p>
+            <p className="top-point-text text-center">{t("badge library")}</p>
           </div>
         </div>
         <div>
-          <Button className="go-quiz-btn" onClick={handleGoQuiz}>
-          {t('go to quiz')} <VscSmiley />
-          </Button>
           <Button className="filter-btn" onClick={handleGoFrontpage}>
-          {t('go to frontpage')} <BsChevronRight />
+            {t("go to frontpage")} <BsChevronRight />
           </Button>
         </div>
       </div>
@@ -97,7 +109,8 @@ export default function BadgeInfo() {
               )}
               <Card.Body className="text-center">
                 <Card.Title className="point-text">
-                  {reward.attributes.description}
+                  {translations[reward.get("description")] ||
+                    reward.get("description")}
                 </Card.Title>
               </Card.Body>
             </Card>

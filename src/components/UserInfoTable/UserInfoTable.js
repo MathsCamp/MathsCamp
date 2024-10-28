@@ -63,7 +63,7 @@ export default function UserInfoTable({
             {t('Points')}
           </td>
           <td data-label="Your points" className="body-text">
-            <span>{total_points} {t('points')}</span>
+            <span>{total_points} {t('Points')}</span>
           </td>
         </tr>
         <tr>

@@ -8,7 +8,7 @@ import { useHistory } from "react-router";
 import { getMascotImage } from "../Utils";
 import { getRewardImage } from "../Utils";
 import UserInfoTable from "../UserInfoTable/UserInfoTable";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function Sidebar() {
   const [rewards, setRewards] = useState([]);
@@ -82,10 +82,10 @@ export default function Sidebar() {
     } else {
       console.log("The user couldn't be retrieved");
       Swal.fire({
-        title: t('Oops, something went wrong!'),
-        text: t('Please try to refresh the page'),
+        title: t("Oops, something went wrong!"),
+        text: t("Please try to refresh the page"),
         icon: "error",
-        confirmButtonText: t('ok'),
+        confirmButtonText: t("ok"),
       });
     }
   };
@@ -93,14 +93,17 @@ export default function Sidebar() {
   const getRecentRewards = async (user) => {
     var rewards = user.get("reward_badge_ids");
     let rewards_owned = [];
-    const reward_amount = rewards.length;
-    for (var i = reward_amount; i > reward_amount - 3; i--) {
-      console.log(rewards[i - 1]);
-      rewards_owned.push(rewards[i - 1]);
+
+    console.log("REWARDS", rewards);
+
+    if (rewards && rewards.length > 0) {
+      // Check if rewards array is not empty
+      const reward_amount = rewards.length;
+      for (var i = reward_amount; i > Math.max(0, reward_amount - 3); i--) {
+        rewards_owned.push(rewards[i - 1]);
+      }
     }
     setRecentRewards(rewards_owned);
-    console.log(rewards);
-    console.log(rewards_owned.length);
   };
 
   useEffect(() => {
@@ -160,13 +163,13 @@ export default function Sidebar() {
             variant="primary"
             type="submit"
           >
-            {t('Change mascot!')}
+            {t("Change mascot!")}
           </Button>
         </div>
       </div>
       <div className="user-strike-div">
         <div className="user-strike-h2-div">
-          <h2 className="user-strike-h2-sb">{t('your strikes')}</h2>
+          <h2 className="user-strike-h2-sb">{t("your strikes")}</h2>
         </div>
         <div className="table-div">
           <UserInfoTable
@@ -181,13 +184,14 @@ export default function Sidebar() {
       {hasWonReward ? (
         <div className="text-center reward_container">
           <p className="reward_message">
-          {t('Congratulations! You have won a reward, check it out!')}
+            {t("Congratulations! You have won a reward, check it out!")}
           </p>
           <Button className="see_reward_btn" onClick={handleSeeReward}>
-          {t('See reward')}<BsTrophy />
+            {t("See reward")}
+            <BsTrophy />
           </Button>
           <Button className="close_btn" onClick={handleClose}>
-          {t('close')} <BsX size={21} />
+            {t("close")} <BsX size={21} />
           </Button>
         </div>
       ) : (
@@ -195,30 +199,33 @@ export default function Sidebar() {
       )}
       <div className="user-bagde-div">
         <div className="user-badge-h2-div">
-          <h2 className="user-badge-h2-sb">{t('Recent earned badges')}</h2>
+          <h2 className="user-badge-h2-sb">{t("Recent earned badges")}</h2>
         </div>
         <div className="show-bagde-div">
           <span className="pointer-cursor" onClick={handleSeeBadgePage}>
-          {t('Click to see all your badges!')}
+            {t("Click to see all your badges!")}
           </span>
         </div>
         <div className="badge-col text-center" style={{}}>
-          {rewards.map((reward) => (
-            <div className="reward-image-container" key={reward.id}>
-              {recent_rewards.includes(reward.id) ? (
-                <img
-                  alt="reward"
-                  className="unlocked-badge selector"
-                  src={getRewardImage(rewards.indexOf(reward))}
-                  title={reward.attributes.description}
-                  //Take user to reward page on click
-                  onClick={handleSeeBadgePage}
-                />
-              ) : (
-                <p></p>
-              )}
-            </div>
-          ))}
+          {recent_rewards.length === 0 ? (
+            <p className="no-rewards-message">{t("practice to get badges")}</p>
+          ) : (
+            rewards.map((reward) => (
+              <div className="reward-image-container" key={reward.id}>
+                {recent_rewards.includes(reward.id) ? (
+                  <img
+                    alt="reward"
+                    className="unlocked-badge selector"
+                    src={getRewardImage(rewards.indexOf(reward))}
+                    title={reward.attributes.description}
+                    onClick={handleSeeBadgePage}
+                  />
+                ) : (
+                  <p></p>
+                )}
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
