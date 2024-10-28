@@ -24,7 +24,6 @@ const fetchBatchTranslations = async (textContentIds, languageCode) => {
   query.equalTo("LanguageId", languageCode);
 
   const results = await query.find();
-  console.log("Query Results:", results);
   let translations = {};
 
   results.forEach((result) => {
@@ -32,7 +31,6 @@ const fetchBatchTranslations = async (textContentIds, languageCode) => {
     const translation = result.get("Translation");
     translations[textContentId] = translation; // Map TextContentId to its translation
   });
-  console.log("Fetched Translations:", translations);
   return translations;
 };
 

@@ -118,7 +118,6 @@ export default function UserInfo() {
       categories: theme.get("categories"),
     }));
 
-    console.log("THEMES ARRAY: ", themesArray);
     setThemes(themesArray);
   };
 

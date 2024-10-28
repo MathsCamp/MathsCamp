@@ -44,11 +44,5 @@ async function updatePointsOnCorrectAnswer(
   }
 }
 
-async function updateUserDataOnThemeCompletion() {
-  const student = Parse.User.current();
-/* 
-  student.set("total_points", new_total_points);
-  student.set("coins", new_total_coins); */
-}
 
 export { updatePointsOnCorrectAnswer };

@@ -40,6 +40,7 @@
 
 .replay-warning{
   font-style: italic;
+  color: #7C7EF2;
 }
 
 .theme-image {
@@ -83,6 +84,11 @@
   justify-content: space-between;
 }
 
+h1{
+  font-family: Solway;
+  font-weight: bold;
+}
+
 .description {
   font-family: "Rubik";
 }
@@ -107,6 +113,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 10px 0;
 }
 
 .close {

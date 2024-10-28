@@ -48,6 +48,11 @@ p {
   font-family: "Rubik";
 }
 
+h1{
+  font-family: Solway;
+  font-weight: bold;
+}
+
 .question {
   font-weight: 650;
   margin-top: 20px;

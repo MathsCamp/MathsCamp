@@ -94,8 +94,6 @@ export default function Sidebar() {
     var rewards = user.get("reward_badge_ids");
     let rewards_owned = [];
 
-    console.log("REWARDS", rewards);
-
     if (rewards && rewards.length > 0) {
       // Check if rewards array is not empty
       const reward_amount = rewards.length;

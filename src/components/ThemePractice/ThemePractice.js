@@ -7,6 +7,8 @@ import SpeakBoble from "../../images/Icons/SpeakBoble.svg";
 import { useLocation } from "react-router-dom";
 import DiamondIcon from "../../images/Icons/Diamond.png";
 import CoinIcon from "../../images/Icons/Coin.png";
+import { registerPoints } from "../../db/submittingPoints";
+import Confetti from "react-confetti";
 // prettier-ignore
 import { Container, Row, Form, Col, Button, Image } from "react-bootstrap";
 // prettier-ignore
@@ -26,7 +28,6 @@ export default function ThemePractice() {
   const theme = location.state?.themeName;
   const correctAnswers = location.state?.correctAnswers || 0;
   const completionImage = location.state?.completionImage;
-  const completionMessage = location.state?.completionMessage;
 
   // Theme questions
   const [themeQuestions, setThemeQuestions] = useState([]);
@@ -37,10 +38,10 @@ export default function ThemePractice() {
   const [completedBefore, setCompletedBefore] = useState(false);
 
   // Rewards - coins and points
-  const [total_points, setTotalPoints] = useState(0);
-  const [total_coins, setTotalCoins] = useState(0);
-  const theme_completion_point_reward = 200;
-  const theme_completion_coint_reward = 80;
+  const [totalPoints, setTotalPoints] = useState(0);
+  const [totalCoins, setTotalCoins] = useState(0);
+  const themeCompletionPointReward = 200;
+  const themeCompletionCoinReward = 80;
   const [themeBadge, setThemeBadge] = useState(null);
 
   // Hint
@@ -96,7 +97,7 @@ export default function ThemePractice() {
     try {
       const results = await query.find();
       setThemeQuestions(results);
-      console.log(results)
+      console.log(results);
     } catch (error) {
       console.error("Error fetching questions:", error);
     }
@@ -140,7 +141,6 @@ export default function ThemePractice() {
         let answeredQuestions = progressEntry.get("correct_question_ids") || [];
 
         if (!answeredQuestions.includes(questionId)) {
-          
           answeredQuestions.push(questionId);
 
           progressEntry.set("correct_question_ids", answeredQuestions);
@@ -166,8 +166,16 @@ export default function ThemePractice() {
       setShowHint(false);
     } else {
       setShowWarning(false);
+      setShowMotivation(false);
       setShowHint(true);
     }
+  };
+
+  const isInputAnswerCorrect = (inputAnswer, correctAnswerString) => {
+    const correctAnswersArray = correctAnswerString
+      .split(",")
+      .map((answer) => answer.trim());
+    return correctAnswersArray.includes(inputAnswer.trim());
   };
 
   const handleSubmit = async (e) => {
@@ -180,9 +188,9 @@ export default function ThemePractice() {
     if (inputValue.trim() === "") {
       setShowHint(false);
       setShowWarning(true);
-    } 
+    }
     // the input answer is correct
-    else if (correctAnswerString.includes(inputValue.trim())) {
+    else if (isInputAnswerCorrect(inputValue, correctAnswerString)) {
       setShowHint(false);
       setShowWarning(false);
       setIsAnswerCorrect(true);
@@ -191,7 +199,7 @@ export default function ThemePractice() {
       setMotivationMessage(randomPositiveMotivation);
       setShowMotivation(true);
       await updateUserProgress(currentQuestion.id);
-    } 
+    }
     // the input answer is NOT correct
     else {
       setShowWarning(false);
@@ -212,24 +220,45 @@ export default function ThemePractice() {
     } else {
       setCurrentStep((prev) => prev + 1);
       setAllQuestionsCompleted(true);
+      if (!completedBefore) {
+        rewardUserForThemeCompletion();
+      }
     }
   };
 
   const rewardUserForThemeCompletion = () => {
-    
-  }
+    const student = Parse.User.current();
+    student.set("total_points", totalPoints + themeCompletionPointReward);
+    student.set("coins", totalCoins + themeCompletionCoinReward);
+    student.add("reward_badge_ids", themeBadge.id);
+    student.save();
+    registerPoints(student.id, themeCompletionCoinReward);
+  };
 
   const goToFrontpage = () => {
     history.push("/frontpage");
   };
 
   useEffect(() => {
-    fetchStudentData();
-    fetchThemeQuestions();
-    fetchBadgeForTheme();
-    setCurrentStep(correctAnswers + 1);
-    setCurrentQuestionIndex(correctAnswers);
-  }, []);
+    if (correctAnswers <= 6) {
+      setCompletedBefore(false);
+      fetchStudentData();
+      fetchThemeQuestions();
+      fetchBadgeForTheme();
+      setCurrentStep(correctAnswers + 1);
+      setCurrentQuestionIndex(correctAnswers);
+    }
+
+    if (correctAnswers === 6) {
+      setCompletedBefore(true);
+      setCurrentStep(1);
+      setCurrentQuestionIndex(0);
+    }
+  }, );
+
+  window.onbeforeunload = function() {
+    return "Are you sure?";
+  };
 
   useEffect(() => {
     if (currentQuestion) {
@@ -246,10 +275,10 @@ export default function ThemePractice() {
               <div>
                 <h5 className="navbar-brand">
                   <p>
-                    <Gem size={20} color="#F4C46B" /> {total_points}
+                    <Gem size={20} color="#F4C46B" /> {totalPoints}
                   </p>
                   <p className="coin-logo">
-                    <BsCoin size={20} color="#F4C46B" /> {total_coins}
+                    <BsCoin size={20} color="#F4C46B" /> {totalCoins}
                   </p>
                 </h5>
                 <div className="space-between">
@@ -265,7 +294,13 @@ export default function ThemePractice() {
                 ></p>
               </div>
               <div>
-                <p className="question">{currentQuestion?.get("question")}</p>
+                <p
+                className="question"
+                dangerouslySetInnerHTML={{
+                  __html:
+                  currentQuestion?.get("question") || "No Question",
+                }}
+                ></p>
                 <Form onSubmit={handleSubmit}>
                   <Form.Group
                     as={Row}
@@ -278,6 +313,7 @@ export default function ThemePractice() {
                         placeholder={t("type your answer here")}
                         value={inputValue}
                         onChange={handleInputChange}
+                        autocomplete="off"
                       />
                       {isAnswerCorrect && (
                         <BsCheckCircle className="correct-icon" />
@@ -313,7 +349,9 @@ export default function ThemePractice() {
                           onClick={handleNext}
                           className="next-btn quiz-btn"
                         >
-                          {t("next question")}
+                          {currentStep < 6
+                            ? t("next question")
+                            : t("collect rewards")}
                           <BsArrowRight className="btn-icon" />
                         </Button>
                       )}
@@ -373,7 +411,8 @@ export default function ThemePractice() {
               <h2> {t("explanation")} </h2>
               <p
                 dangerouslySetInnerHTML={{
-                  __html: currentQuestion?.get("explanation") || "No Question",
+                  __html:
+                    currentQuestion?.get("explanation") || "No explanation",
                 }}
               ></p>
             </div>
@@ -382,15 +421,16 @@ export default function ThemePractice() {
       )}
       {allQuestionsCompleted && (
         <div className="d-flex justify-content-center">
+          <Confetti></Confetti>
           <Col fluid className="completed-container">
             <div className="completed-text-container">
               <div>
                 <h5 className="navbar-brand">
                   <p>
-                    <Gem size={20} color="#F4C46B" /> {total_points}
+                    <Gem size={20} color="#F4C46B" /> {totalPoints}
                   </p>
                   <p className="coin-logo">
-                    <BsCoin size={20} color="#F4C46B" /> {total_coins}
+                    <BsCoin size={20} color="#F4C46B" /> {totalCoins}
                   </p>
                 </h5>
                 <div className="space-between">
@@ -400,7 +440,7 @@ export default function ThemePractice() {
                 <hr className="line"></hr>
               </div>
               <div className="d-flex flex-column">
-                <h1 className="text-center"> {t("Well done!")} </h1>
+                <h2 className="text-center"> {t("Well done!")} </h2>
                 <div className="d-flex justify-content-center">
                   <img
                     src={completionImage || "default-image-url.jpg"}
@@ -411,49 +451,55 @@ export default function ThemePractice() {
                 <p
                   className="text-center mt-4 mb-4"
                   dangerouslySetInnerHTML={{
-                    __html: completionMessage || "",
+                    __html: completedBefore
+                      ? t("you have already solved all problems for this theme")
+                      : t("you have solved all problems for this theme"),
                   }}
                 ></p>
               </div>
-              <div className="completion-reward-container">
-                <div className="d-flex justify-content-center">
-                  <img
-                    src={themeBadge.get("reward_image").url()}
-                    alt="Badge"
-                    className="badge-icon mt-5"
-                  />
-                  <p className="reward-title purple mt-4 pt-3">
-                    {t("New")} {t("badge")}
-                  </p>
+              {!completedBefore && (
+                <div className="completion-reward-container">
+                  <div className="d-flex justify-content-center">
+                    <img
+                      src={themeBadge.get("reward_image").url()}
+                      alt="Badge"
+                      className="badge-icon mt-5"
+                    />
+                    <p className="reward-title purple mt-4 pt-3">
+                      {t("New")} {t("badge")}
+                    </p>
+                  </div>
+                  <div>
+                    <img
+                      src={CoinIcon}
+                      alt="Coin Icon"
+                      className="completion-icon"
+                    />
+                    <p className="reward-title yellow">
+                      {themeCompletionCoinReward} {t("coins")}
+                    </p>
+                  </div>
+                  <div>
+                    <img
+                      src={DiamondIcon}
+                      alt="Diamond Icon"
+                      className="completion-icon"
+                    />
+                    <p className="reward-title blue">
+                      {themeCompletionPointReward} {t("Point")}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <img
-                    src={CoinIcon}
-                    alt="Coin Icon"
-                    className="completion-icon"
-                  />
-                  <p className="reward-title yellow">
-                    {theme_completion_coint_reward} {t("coins")}
-                  </p>
-                </div>
-                <div>
-                  <img
-                    src={DiamondIcon}
-                    alt="Diamond Icon"
-                    className="completion-icon"
-                  />
-                  <p className="reward-title blue">
-                    {theme_completion_point_reward} {t("Point")}
-                  </p>
-                </div>
-              </div>
+              )}
               <div className="d-flex justify-content-center pt-4">
                 <Button
                   variant="primary"
                   onClick={goToFrontpage}
                   className="next-btn quiz-btn w-25 "
                 >
-                  {t("collect and return to frontpage")}
+                  {!completedBefore
+                    ? t("collect and return to frontpage")
+                    : t("go to frontpage")}
                 </Button>
               </div>
             </div>

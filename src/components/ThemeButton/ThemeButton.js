@@ -12,8 +12,7 @@ export default function ThemeButton({
   descriptionImage,
   themeDescription,
   correctAnswers,
-  completionImage,
-  completionMessage
+  completionImage
 }) {
   const history = useHistory();
   const { t } = useTranslation();
@@ -47,7 +46,7 @@ export default function ThemeButton({
     setShowModal(false);
     history.push({
       pathname: "/theme",
-      state: { themeName, correctAnswers, completionImage, completionMessage },
+      state: { themeName, correctAnswers, completionImage },
     });
   };
 
