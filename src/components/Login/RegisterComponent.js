@@ -255,7 +255,7 @@ export default function RegisterComponent() {
                       role="status"
                       aria-hidden="true"
                     />
-                    <span className="sr-only">{t("loading...")}</span>
+                    <span className="sr-only"> {t("Preparing the app for you")}</span>
                   </>
                 ) : (
                   <>
