@@ -1,10 +1,14 @@
 {
   "files": {
-    "main.css": "/static/css/main.0db18080.css",
-    "main.js": "/static/js/main.ff4d69cd.js",
+    "main.css": "/static/css/main.80cc398e.css",
+    "main.js": "/static/js/main.7ac8ba18.js",
     "static/js/787.9c793c4c.chunk.js": "/static/js/787.9c793c4c.chunk.js",
     "static/media/breakCamel.png": "/static/media/breakCamel.831e24214bb5f78255d9.png",
+    "static/media/RobloxBadge.png": "/static/media/RobloxBadge.3b70d6f423556ee95bea.png",
+    "static/media/FodboldBadge.png": "/static/media/FodboldBadge.9578103ca42623086764.png",
     "static/media/rubik-all-400-normal.woff": "/static/media/rubik-all-400-normal.84344aed90cae7142af2.woff",
+    "static/media/Coin.png": "/static/media/Coin.5b71baf990d8115437ec.png",
+    "static/media/Diamond.png": "/static/media/Diamond.82ba1d0327703a526526.png",
     "static/media/bag.png": "/static/media/bag.9adccfb90036ef97cf76.png",
     "static/media/mouth.png": "/static/media/mouth.c0689d7f6e87d1f36cc7.png",
     "static/media/milk.png": "/static/media/milk.cf6903e7aab7ee068fbe.png",
@@ -20,6 +24,7 @@
     "static/media/love-letter.png": "/static/media/love-letter.6d60dcee3d6b57be98d0.png",
     "static/media/helmet-man.png": "/static/media/helmet-man.0a26f7b31ddd2c04786b.png",
     "static/media/cake.png": "/static/media/cake.81477d6bdba3023104fb.png",
+    "static/media/legoBadge.png": "/static/media/legoBadge.c44511a7d42a08b99f2c.png",
     "static/media/mascot15.png": "/static/media/mascot15.60d4dc052900f8bfd967.png",
     "static/media/mascot10.png": "/static/media/mascot10.811765927616cd54e8ab.png",
     "static/media/solway-all-400-normal.woff": "/static/media/solway-all-400-normal.0076a34ea56468501ad1.woff",
@@ -32,6 +37,7 @@
     "static/media/mascot17.png": "/static/media/mascot17.f1c18f6a6be57c2f0e3f.png",
     "static/media/mascot14.png": "/static/media/mascot14.ae342c596271f58cef85.png",
     "static/media/orange.png": "/static/media/orange.40586fa13e2d18969da0.png",
+    "static/media/SodedyrBadge.png": "/static/media/SodedyrBadge.2bdd442fe5c57eda81c7.png",
     "static/media/egg.png": "/static/media/egg.c64a509a245311bb9ace.png",
     "static/media/bear.png": "/static/media/bear.04ad86ed4cbc6aceff38.png",
     "static/media/mascot3.png": "/static/media/mascot3.985f864f36c14c1bb563.png",
@@ -54,6 +60,8 @@
     "static/media/mascot13.png": "/static/media/mascot13.3c5f40973ec109ec8e84.png",
     "static/media/mascot2.png": "/static/media/mascot2.6b178a173a2ad31e15b5.png",
     "static/media/mascot6.png": "/static/media/mascot6.f11f238c155bed40bed1.png",
+    "static/media/FortniteBadge.png": "/static/media/FortniteBadge.a32a2512b94234e479ee.png",
+    "static/media/TiktokBadge.png": "/static/media/TiktokBadge.f797cb4e17cf1aacc796.png",
     "static/media/rubik-latin-400-normal.woff2": "/static/media/rubik-latin-400-normal.603d2af702968ad3f2b1.woff2",
     "static/media/teacher.png": "/static/media/teacher.3a96d5c48b39d4ad6d65.png",
     "static/media/calculator-badge.png": "/static/media/calculator-badge.09340ec3b6b6b1ac2bf8.png",
@@ -62,17 +70,18 @@
     "static/media/rubik-cyrillic-400-normal.woff2": "/static/media/rubik-cyrillic-400-normal.2cf3b3807f631f048a93.woff2",
     "static/media/rubik-cyrillic-ext-400-normal.woff2": "/static/media/rubik-cyrillic-ext-400-normal.1eaca7033c07a154f029.woff2",
     "static/media/rubik-hebrew-400-normal.woff2": "/static/media/rubik-hebrew-400-normal.1fca75f588f14eeeca1d.woff2",
-    "static/media/logo-postlogin.svg": "/static/media/logo-postlogin.f3421fb7042b3deddc8565aad984c108.svg",
-    "static/media/logo-prelogin.svg": "/static/media/logo-prelogin.9a9825cf41b43ae07c14aee1ea1b10ad.svg",
+    "static/media/logo-postlogin.svg": "/static/media/logo-postlogin.a9a6b8f45967c78a9131b1068e2f976d.svg",
+    "static/media/logo-prelogin.svg": "/static/media/logo-prelogin.c6b0a2cad767074b02db13ae95285e8c.svg",
     "index.html": "/index.html",
     "static/media/blank-image.PNG": "/static/media/blank-image.60cfc62dfa465bed9c24.PNG",
-    "static/media/SpeakBoble.svg": "/static/media/SpeakBoble.52d518f5696e3ab329bf36869a741871.svg",
-    "main.0db18080.css.map": "/static/css/main.0db18080.css.map",
-    "main.ff4d69cd.js.map": "/static/js/main.ff4d69cd.js.map",
+    "static/media/SpeakBoble.svg": "/static/media/SpeakBoble.95a792807235ea5bf6e90f6e926317a0.svg",
+    "static/media/getFetch.cjs": "/static/media/getFetch.c4cca45e22bc1b2c7d0d.cjs",
+    "main.80cc398e.css.map": "/static/css/main.80cc398e.css.map",
+    "main.7ac8ba18.js.map": "/static/js/main.7ac8ba18.js.map",
     "787.9c793c4c.chunk.js.map": "/static/js/787.9c793c4c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0db18080.css",
-    "static/js/main.ff4d69cd.js"
+    "static/css/main.80cc398e.css",
+    "static/js/main.7ac8ba18.js"
   ]
 }
