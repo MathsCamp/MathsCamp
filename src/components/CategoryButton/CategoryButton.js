@@ -22,7 +22,7 @@ export default function CategoryButton({ category, categoryNameTranslated, level
 
   const handlePractice = (e) => {
     e.preventDefault();
-    logActivity();
+    //logActivity();
     history.push({
       pathname: "/practice",
       state: category,

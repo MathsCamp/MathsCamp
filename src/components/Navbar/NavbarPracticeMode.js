@@ -44,7 +44,7 @@ export default function NavbarPracticeMode() {
   const handleRanking = (e) => {
     e.preventDefault();
     hotjar.event("Ranking clicked");
-    logActivity();
+    //logActivity();
     history.push("/ranking");
   };
 

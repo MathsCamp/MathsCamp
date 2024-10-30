@@ -173,7 +173,7 @@ export default function ThemePractice() {
 
   const isInputAnswerCorrect = (inputAnswer, correctAnswerString) => {
     const correctAnswersArray = correctAnswerString
-      .split(",")
+      .split(", ")
       .map((answer) => answer.trim());
     return correctAnswersArray.includes(inputAnswer.trim());
   };
@@ -202,6 +202,7 @@ export default function ThemePractice() {
     }
     // the input answer is NOT correct
     else {
+      setShowHint(false);
       setShowWarning(false);
       const randomNegativeMotivation = getRandomMotivation(motivationWrong);
       setMotivationMessage(randomNegativeMotivation);
@@ -254,7 +255,7 @@ export default function ThemePractice() {
       setCurrentStep(1);
       setCurrentQuestionIndex(0);
     }
-  }, );
+  }, []);
 
   window.onbeforeunload = function() {
     return "Are you sure?";
@@ -270,7 +271,7 @@ export default function ThemePractice() {
     <Container>
       {!allQuestionsCompleted && (
         <Container className="outer-container">
-          <Col fluid className="question-container">
+          <Col className="question-container">
             <div className="text-section-container">
               <div>
                 <h5 className="navbar-brand">
@@ -313,7 +314,8 @@ export default function ThemePractice() {
                         placeholder={t("type your answer here")}
                         value={inputValue}
                         onChange={handleInputChange}
-                        autocomplete="off"
+                        autoComplete="off"
+                        className={isAnswerCorrect ? "correct-input" : ""}
                       />
                       {isAnswerCorrect && (
                         <BsCheckCircle className="correct-icon" />
@@ -422,7 +424,7 @@ export default function ThemePractice() {
       {allQuestionsCompleted && (
         <div className="d-flex justify-content-center">
           <Confetti></Confetti>
-          <Col fluid className="completed-container">
+          <Col className="completed-container">
             <div className="completed-text-container">
               <div>
                 <h5 className="navbar-brand">
