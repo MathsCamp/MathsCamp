@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.80cc398e.css",
-    "main.js": "/static/js/main.e9fe9535.js",
+    "main.js": "/static/js/main.4966e2b8.js",
     "static/js/787.9c793c4c.chunk.js": "/static/js/787.9c793c4c.chunk.js",
     "static/media/breakCamel.png": "/static/media/breakCamel.831e24214bb5f78255d9.png",
     "static/media/RobloxBadge.png": "/static/media/RobloxBadge.3b70d6f423556ee95bea.png",
@@ -77,11 +77,11 @@
     "static/media/SpeakBoble.svg": "/static/media/SpeakBoble.95a792807235ea5bf6e90f6e926317a0.svg",
     "static/media/getFetch.cjs": "/static/media/getFetch.c4cca45e22bc1b2c7d0d.cjs",
     "main.80cc398e.css.map": "/static/css/main.80cc398e.css.map",
-    "main.e9fe9535.js.map": "/static/js/main.e9fe9535.js.map",
+    "main.4966e2b8.js.map": "/static/js/main.4966e2b8.js.map",
     "787.9c793c4c.chunk.js.map": "/static/js/787.9c793c4c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.80cc398e.css",
-    "static/js/main.e9fe9535.js"
+    "static/js/main.4966e2b8.js"
   ]
 }
