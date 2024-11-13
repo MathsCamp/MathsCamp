@@ -4,13 +4,10 @@ import Sidebar from "../Sidebar/Sidebar";
 import CategoryButton from "../CategoryButton/CategoryButton";
 import ThemeButton from "../ThemeButton/ThemeButton";
 import { useHistory } from "react-router";
-import { Button, Image, Container, Row, Col } from "react-bootstrap";
-import { BsPerson } from "react-icons/bs";
-import { getMascotImage } from "../Utils";
+import { Image, Container, Row, Col } from "react-bootstrap";
 import { getTeacherImage } from "../Utils";
 import "./UserInfoTeacher.css";
 import { hotjar } from "react-hotjar";
-import { async } from "parse/lib/browser/Storage";
 import { useTranslation } from "react-i18next";
 import { fetchBatchTranslations } from "../../db/TranslationRepository";
 import { currentLanguageCode } from "../../App";
@@ -19,14 +16,11 @@ export default function UserInfo() {
 
   // User info and status
   const [username, setUsername] = useState("");
-  const [total_answered_questions, setTotal_answered_questions] = useState(0);
-  const [active_mascot_index, setActiveMascotIndex] = useState(24);
 
   // Categories
   const [category_names, setCategoryNames] = useState([]);
   const [category_names_translated, setCategoryNamesTranslated] = useState([]);
   const [category_levels, setCategoryLevels] = useState([]);
-  const [correct_question_ids, setCorrectQuestionIds] = useState([]);
   const [correct_questions, setCorrectQuestions] = useState([]);
 
   // Themes
@@ -73,7 +67,6 @@ export default function UserInfo() {
     setCategoryNames(categoryNames);
     setCategoryNamesTranslated(translatedNamesArray);
     setCategoryLevels(categoryLevels);
-    setCorrectQuestionIds(answeredQuestions);
 
     var correctQuestions = [];
 
@@ -160,12 +153,7 @@ export default function UserInfo() {
     if (user) {
       var username = user.get("username");
       const userID = user.id;
-      var total_answered_questions = user.get("total_answered_questions");
-      var activeMascot = user.get("active_mascot_id");
-      var activeMascotIndex = await fetchMascots(activeMascot);
       setUsername(username);
-      setTotal_answered_questions(total_answered_questions);
-      setActiveMascotIndex(activeMascotIndex);
       findCategories(userID);
       findThemes();
       findAnsweredQuestionsForThemes(userID);
@@ -184,14 +172,6 @@ export default function UserInfo() {
     hotjar.initialize(2944506);
   }, []);
 
-  const fetchMascots = async (active_mascot_id) => {
-    const Mascots = new Parse.Object.extend("Mascot");
-    const query = new Parse.Query(Mascots);
-    const mascotArray = await query.find();
-    var mascotIdArray = mascotArray.map((obj) => obj.id);
-    var mascotIndex = mascotIdArray.indexOf(active_mascot_id);
-    return mascotIndex;
-  };
 
   return (
     <Container fluid className="user-container">

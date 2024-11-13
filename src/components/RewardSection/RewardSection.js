@@ -9,6 +9,8 @@ import Parse from "parse";
 import "./RewardSection.css";
 import { hotjar } from "react-hotjar";
 import { useTranslation } from "react-i18next";
+import { currentLanguageCode } from "../../App";
+import { fetchTranslation } from "../../db/TranslationRepository";
 
 export default function RewardSection() {
   const [description, setDescription] = useState("");
@@ -42,12 +44,14 @@ export default function RewardSection() {
     const Rewards = new Parse.Object.extend("Reward");
     const query = new Parse.Query(Rewards);
     const rewardArray = await query.find();
-    query.equalTo("objectId", reward_id);
+    query.equalTo("objectId", reward_id); 
     const reward = await query.first();
-    const description = reward.attributes.description;
+    const textContentId = reward.get("description");
+    const translation = await fetchTranslation(textContentId, currentLanguageCode);
+    console.log(translation);
     const index = rewardArray.map((element) => element.id).indexOf(reward_id);
     const imgsrc = getRewardImage(index);
-    setDescription(description);
+    setDescription(translation);
     setImage(imgsrc);
     return reward;
   };

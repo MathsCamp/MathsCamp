@@ -33,7 +33,7 @@ i18n
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* Add Suspense around the App component */}
+    {/* Add Suspense around the App component for the translation to properly work */}
     <Suspense fallback={<div>Loading translations...</div>}>
       <App />
     </Suspense>

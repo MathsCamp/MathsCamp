@@ -2,7 +2,7 @@ import Parse from "parse";
 
 // Fetch a single translation
 const fetchTranslation = async (textContentId, languageId) => {
-  const Translation = Parse.Object.extend("Translation");
+  const Translation = Parse.Object.extend("Translations");
   const query = new Parse.Query(Translation);
 
   query.equalTo("TextContentId", textContentId);
@@ -16,7 +16,7 @@ const fetchTranslation = async (textContentId, languageId) => {
   }
 };
 
-// Fetch a bunch of translations at once
+// Fetch a bunch of translations at once (text content id's given as array)
 const fetchBatchTranslations = async (textContentIds, languageCode) => {
   
   const query = new Parse.Query("Translations");
