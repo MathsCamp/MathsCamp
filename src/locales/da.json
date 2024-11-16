@@ -63,6 +63,7 @@
   "welcome!": "Velkommen!",
   "create a user and play today": "Opret en bruger og spil i dag",
   "enter an email": "Skriv din email",
+  "enter an username": "Skriv et brugernavn",
   "enter a password": "Skriv et password",
   "parental email (optional)": "Forældre-email (valgfri)",
   "this email will be used for password recovery": "Denne email vil blive brugt til nulstilling af password",

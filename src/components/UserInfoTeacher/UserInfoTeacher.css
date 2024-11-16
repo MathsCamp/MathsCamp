@@ -42,7 +42,7 @@
   background-color: #f2b84b;
   padding: 8%;
   border-radius: 35px;
-  max-width: 460px;
+  width: auto;
 }
 
 .teacher-welcome {
@@ -67,10 +67,9 @@
 .theme-row {
   display: flex;
   flex-direction: row;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   overflow-x: auto;
   overflow-y: hidden;
-  width: 100%;
   white-space: nowrap; /* Prevents wrapping */
 }
 

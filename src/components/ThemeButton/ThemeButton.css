@@ -11,7 +11,7 @@
   border-radius: 8px;
   padding: 0%;
   margin: 20px 30px 20px 0px;
-  min-width: 250px;
+  width: 240px;
   background-color: #d7d8fb;
 }
 
@@ -35,12 +35,12 @@
 .completion-icon {
   font-size: 30px;
   padding-left: 5px;
-  color: #7C7EF2;
+  color: #7c7ef2;
 }
 
-.replay-warning{
+.replay-warning {
   font-style: italic;
-  color: #7C7EF2;
+  color: #7c7ef2;
 }
 
 .theme-image {
@@ -84,7 +84,7 @@
   justify-content: space-between;
 }
 
-h1{
+h1 {
   font-family: Solway;
   font-weight: bold;
 }

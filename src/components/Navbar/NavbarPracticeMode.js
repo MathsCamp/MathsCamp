@@ -62,12 +62,13 @@ export default function NavbarPracticeMode() {
       </Col>
       <Col lg={1.5}>
         <div className="btn-toolbar">
-          <Button
+          {/* <Button
             className="btn-primary lg ranking-btn-postlogin"
             onClick={handleRanking}
           >
             {t('ranking')} <Trophy size={15} />
-          </Button>
+          </Button> */}
+          
           <Button className="btn-primary lg home-btn" onClick={handleHome}>
           {t('home')} <HouseDoor size={15} />
           </Button>

@@ -31,7 +31,7 @@ export default function ThemeButton({
   // If the themebutton is clicked, it might show modal
   const handleThemeButtonClick = (e) => {
     e.preventDefault();
-    //logActivity();
+    logActivity();
     if (correctAnswers >= 1 && correctAnswers < 6 ) {
       // Directly navigate to the practice page if only one question has been answered
       handleStart();

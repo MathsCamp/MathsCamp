@@ -175,7 +175,7 @@ export default function ThemePractice() {
     const correctAnswersArray = correctAnswerString
       .split(", ")
       .map((answer) => answer.trim());
-    return correctAnswersArray.includes(inputAnswer.trim());
+    return correctAnswersArray.includes(inputAnswer.trim().toLowerCase());
   };
 
   const handleSubmit = async (e) => {

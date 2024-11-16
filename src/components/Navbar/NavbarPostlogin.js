@@ -1,13 +1,13 @@
 import React from "react";
 import { Button, Container, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
-import { DoorOpen, HouseDoor, Trophy } from "react-bootstrap-icons";
+import { DoorOpen, HouseDoor, Trophy, ClipboardCheck } from "react-bootstrap-icons";
 import { BsMailbox } from "react-icons/bs";
 import Logo from "../../images/Logo/logo-postlogin.svg";
 import Parse from "parse";
 import { hotjar } from "react-hotjar";
 import "./NavbarPostlogin.css";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 
 export default function NavbarPostlogin() {
   const history = useHistory();
@@ -63,29 +63,41 @@ export default function NavbarPostlogin() {
       </Col>
       <Col lg={1.5}>
         <div className="btn-toolbar postlogin-toolbar">
-          <Button
+          {/* <Button
             className="btn-primary lg ranking-btn-postlogin"
             onClick={handleRanking}
           >
             {t('ranking')} <Trophy size={15} />
+          </Button> */}
+          <Button
+            className="btn-primary lg ranking-btn-postlogin"
+            onClick={() =>
+              window.open(
+                "https://forms.gle/o2aSK7i1TnajJqfJ7",
+                "_blank",
+                "noopener,noreferrer"
+              )
+            }
+          >
+            {t("Spørgeskema")} <ClipboardCheck size={15} />
           </Button>
           <Button
             className="btn-primary lg home-btn-postlogin"
             onClick={handleHome}
           >
-            {t('home')} <HouseDoor size={15} />
+            {t("home")} <HouseDoor size={15} />
           </Button>
           <Button
             className="contact-link contact-btn"
             onClick={handleSendEmail}
           >
-            {t('contact')} <BsMailbox size={15} />
+            {t("contact")} <BsMailbox size={15} />
           </Button>
           <Button
             className="btn-primary lg logout-btn-postlogin"
             onClick={handleLogOut}
           >
-            {t('log out')} <DoorOpen size={15} />
+            {t("log out")} <DoorOpen size={15} />
           </Button>
         </div>
       </Col>

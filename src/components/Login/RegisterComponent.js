@@ -185,7 +185,7 @@ export default function RegisterComponent() {
                 <Form.Label>{t("username")}</Form.Label>
                 <Form.Control
                   type="name"
-                  placeholder={t("enter an email")}
+                  placeholder={t("enter an username")}
                   onChange={updateUsername}
                 />
               </Form.Group>
