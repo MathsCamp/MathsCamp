@@ -1,5 +1,5 @@
 import { Container, Form, Col, Row, Button, Spinner } from "react-bootstrap";
-import { CardList, Tree } from "react-bootstrap-icons";
+import { CardList, Tree, Eye, EyeSlash } from "react-bootstrap-icons";
 import { useHistory } from "react-router";
 import React, { useState, useEffect } from "react";
 import Parse from "parse";
@@ -12,6 +12,7 @@ import { currentLanguageCode } from "../../App";
 export default function RegisterComponent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [email, setEmail] = useState("");
   const [classroomid, setClassroomid] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +25,10 @@ export default function RegisterComponent() {
 
   const updatePassword = (e) => {
     setPassword(e.target.value);
+  };
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   const updateEmail = (e) => {
@@ -189,13 +194,32 @@ export default function RegisterComponent() {
                   onChange={updateUsername}
                 />
               </Form.Group>
-              <Form.Group controlId="formPassword" className="upperform">
+              <Form.Group
+                controlId="formPassword"
+                className="upperform position-relative"
+              >
                 <Form.Label>{t("password")}</Form.Label>
-                <Form.Control
-                  type="password"
-                  placeholder={t("enter a password")}
-                  onChange={updatePassword}
-                />
+                <div className="password-input-container">
+                  <Form.Control
+                    type={showPassword ? "text" : "password"}
+                    placeholder={t("enter a password")}
+                    onChange={updatePassword}
+                    className="pr-5" // Add padding to the right to make space for the icon
+                  />
+                  <span
+                    className="toggle-password-icon position-absolute"
+                    style={{
+                      right: "10px",
+                      top: "70%",
+                      transform: "translateY(-50%)",
+                      cursor: "pointer",
+                      fontWeight: "700"
+                    }}
+                    onClick={togglePasswordVisibility}
+                  >
+                    {showPassword ? <EyeSlash /> : <Eye />}
+                  </span>
+                </div>
               </Form.Group>
               <Form.Group controlId="formEmail" className="upperform">
                 <Form.Label>{t("parental email (optional)")}</Form.Label>
