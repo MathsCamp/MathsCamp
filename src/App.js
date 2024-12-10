@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from "./pages/LandingPage";
 import RegisterPage from "./pages/RegisterPage";
@@ -16,17 +16,27 @@ import ThemePage from "./pages/ThemePage";
 import "bootstrap/dist/css/bootstrap.css";
 import "@fontsource/rubik";
 import "@fontsource/solway";
-import i18n from "./translation/i18n";
+import i18n from "i18next";
 
 export const LanguageContext = createContext();
 
 function App() {
-  const [currentLanguage, setCurrentLanguage] = useState("da");
+  // Initialize language from localStorage or default to "da"
+  const [currentLanguage, setCurrentLanguage] = useState(() => {
+    return localStorage.getItem("appLanguage") || "da";
+  });
 
+  // Function to change language and persist it in localStorage
   const changeLanguage = (langCode) => {
-    setCurrentLanguage(langCode); // Update state
-    i18n.changeLanguage(langCode); // Update i18n language
+    setCurrentLanguage(langCode);
+    localStorage.setItem("appLanguage", langCode); // Persist to localStorage, because for some reason, i18n localstorage variable can't be accessed or changed
   };
+
+  // Synchronize i18n lang whenever the language changes
+  useEffect(() => {
+    i18n.changeLanguage(currentLanguage);
+  }, [currentLanguage]);
+
 
   return (
     <LanguageContext.Provider value={{ currentLanguage, changeLanguage }}>

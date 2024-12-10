@@ -30,7 +30,7 @@ export default function UserInfo() {
   // General
   const history = useHistory();
   const { t } = useTranslation();
-  const { currentLanguage, changeLanguage } = useContext(LanguageContext);
+  const { currentLanguage } = useContext(LanguageContext);
 
   const findCategories = async (id) => {
     // Create a new query for the "Progress" table to find entries based on user_id

@@ -21,7 +21,7 @@ import { LanguageContext } from "../../App";
 export default function ThemePractice() {
   //Translation and practical setup
   const { t } = useTranslation();
-  const { currentLanguage, changeLanguage } = useContext(LanguageContext);
+  const { currentLanguage } = useContext(LanguageContext);
   const location = useLocation();
   const history = useHistory();
 

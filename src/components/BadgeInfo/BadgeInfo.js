@@ -26,11 +26,6 @@ export default function BadgeInfo() {
     history.push("/frontpage");
   };
 
-  const handleGoQuiz = (e) => {
-    e.preventDefault();
-    history.push("/practice");
-  };
-
   const fetchRewards = async () => {
     const Rewards = new Parse.Object.extend("Reward");
     const query = new Parse.Query(Rewards);

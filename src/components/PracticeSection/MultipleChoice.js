@@ -1,22 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
 import Parse from "parse";
 import Swal from "sweetalert2";
-import {
-  Container,
-  Row,
-  Form,
-  Col,
-  Button,
-  Card,
-  Image,
-} from "react-bootstrap";
-import {
-  BsLifePreserver,
-  BsCheckCircle,
-  BsChevronRight,
-  BsFileText,
-  BsCoin,
-} from "react-icons/bs";
+import {Container, Row, Form, Col, Button, Card, Image } from "react-bootstrap";
+import { BsLifePreserver, BsCheckCircle, BsChevronRight, BsFileText, BsCoin } from "react-icons/bs";
 import { Gem } from "react-bootstrap-icons";
 import { useHistory } from "react-router";
 import { useLocation } from "react-router-dom";
@@ -25,12 +11,14 @@ import SpeakBoble from "../../images/Icons/SpeakBoble.svg";
 import "./MultipleChoice.css";
 import { hotjar } from "react-hotjar";
 import { useTranslation } from "react-i18next";
-
+import { fetchTranslation } from "../../db/TranslationRepository";
+import { LanguageContext } from "../../App";
 import { updatePointsOnCorrectAnswer } from "../../db/submittingAnswers";
 import { registerPoints } from "../../db/submittingPoints";
 
 export default function MultipleChoice() {
   const { t } = useTranslation();
+  const { currentLanguage } = useContext(LanguageContext);
   const [level, setLevel] = useState();
   const [count, setCount] = useState();
   const [showHint, setShowHint] = useState(false);
@@ -104,7 +92,7 @@ export default function MultipleChoice() {
     questionQuery.equalTo("level", progressLevel);
 
     // Adds language filter
-    questionQuery.equalTo("languageId", '02');
+    questionQuery.equalTo("languageId", currentLanguage);
     
     try {
       let question = await questionQuery.find();
@@ -234,6 +222,10 @@ export default function MultipleChoice() {
     setShowMotivation(false);
     fetchQuestion(retrieveStudent(location.state));
   };
+
+  const fetchCategoryTranslation = async() =>{
+    fetchTranslation(category,)
+  }
 
   const fetchMascots = async (active_mascot_id) => {
     const Mascots = new Parse.Object.extend("Mascot");
@@ -648,18 +640,27 @@ export default function MultipleChoice() {
             </h5>
             <div className="category-h1">
               {category ? (
+                // This should not be hardcoded in future iterations.
+                // This entire component should be refactored...
                 <h1>
-                  {category.toLowerCase() === "measurement"
-                    ? "Måling"
-                    : category.toLowerCase() === "algebra"
+                {category.toLowerCase() === "measurement"
+                  ? currentLanguage === "en"
+                    ? "Measurement"
+                    : "Måling"
+                  : category.toLowerCase() === "algebra"
+                  ? currentLanguage === "en"
                     ? "Algebra"
-                    : category.toLowerCase() === "geometry"
-                    ? "Geometri"
-                    : category.toLowerCase() === "number"
-                    ? "Tal"
-                    : category.charAt(0).toLocaleUpperCase() +
-                      category.slice(1)}
-                </h1>
+                    : "Algebra"
+                  : category.toLowerCase() === "geometry"
+                  ? currentLanguage === "en"
+                    ? "Geometry"
+                    : "Geometri"
+                  : category.toLowerCase() === "number"
+                  ? currentLanguage === "en"
+                    ? "Number"
+                    : "Tal"
+                  : category.charAt(0).toLocaleUpperCase() + category.slice(1)}
+              </h1>
               ) : (
                 <></>
               )}
