@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.9fd1ab31.css",
-    "main.js": "/static/js/main.3c745d50.js",
+    "main.css": "/static/css/main.d151aabb.css",
+    "main.js": "/static/js/main.d718bab7.js",
     "static/js/787.9c793c4c.chunk.js": "/static/js/787.9c793c4c.chunk.js",
     "static/media/breakCamel.png": "/static/media/breakCamel.831e24214bb5f78255d9.png",
     "static/media/RobloxBadge.png": "/static/media/RobloxBadge.3b70d6f423556ee95bea.png",
@@ -55,6 +55,7 @@
     "static/media/mascot16.png": "/static/media/mascot16.b95cfb63bbdae8c20055.png",
     "static/media/solway-latin-400-normal.woff2": "/static/media/solway-latin-400-normal.baa7d3918c8c0cc6aeaa.woff2",
     "static/media/mascot22.png": "/static/media/mascot22.d63f3e81c4f13114442f.png",
+    "static/media/EN.png": "/static/media/EN.5a1e5cfeb1faed1fcde6.png",
     "static/media/mascot21.png": "/static/media/mascot21.f987818fe8744a228974.png",
     "static/media/mascot8.png": "/static/media/mascot8.0812ee4c315435013ce9.png",
     "static/media/mascot13.png": "/static/media/mascot13.3c5f40973ec109ec8e84.png",
@@ -76,12 +77,12 @@
     "static/media/blank-image.PNG": "/static/media/blank-image.60cfc62dfa465bed9c24.PNG",
     "static/media/SpeakBoble.svg": "/static/media/SpeakBoble.95a792807235ea5bf6e90f6e926317a0.svg",
     "static/media/getFetch.cjs": "/static/media/getFetch.c4cca45e22bc1b2c7d0d.cjs",
-    "main.9fd1ab31.css.map": "/static/css/main.9fd1ab31.css.map",
-    "main.3c745d50.js.map": "/static/js/main.3c745d50.js.map",
+    "main.d151aabb.css.map": "/static/css/main.d151aabb.css.map",
+    "main.d718bab7.js.map": "/static/js/main.d718bab7.js.map",
     "787.9c793c4c.chunk.js.map": "/static/js/787.9c793c4c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.9fd1ab31.css",
-    "static/js/main.3c745d50.js"
+    "static/css/main.d151aabb.css",
+    "static/js/main.d718bab7.js"
   ]
 }
