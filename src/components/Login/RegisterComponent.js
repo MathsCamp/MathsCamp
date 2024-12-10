@@ -1,13 +1,15 @@
 import { Container, Form, Col, Row, Button, Spinner } from "react-bootstrap";
 import { CardList, Tree, Eye, EyeSlash } from "react-bootstrap-icons";
 import { useHistory } from "react-router";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Parse from "parse";
 import Swal from "sweetalert2";
 import "./RegisterComponent.css";
 import { hotjar } from "react-hotjar";
 import { useTranslation } from "react-i18next";
-import { currentLanguageCode } from "../../App";
+import { LanguageContext } from "../../App";
+import DanishFlag from '../../images/Languages/DA.png';
+import EnglishFlag from '../../images/Languages/EN.png';
 
 export default function RegisterComponent() {
   const [username, setUsername] = useState("");
@@ -18,6 +20,11 @@ export default function RegisterComponent() {
   const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const { t } = useTranslation();
+  const { currentLanguage, changeLanguage } = useContext(LanguageContext);
+
+  const handleLanguageChange = (langCode) => {
+    changeLanguage(langCode);
+  };
 
   const updateUsername = (e) => {
     setUsername(e.target.value);
@@ -44,7 +51,7 @@ export default function RegisterComponent() {
     return randomEmail;
   };
 
-  const generateProgressTables = async (u) => {
+  const generateCategoryProgressEntries = async (u) => {
     const query = new Parse.Query("Category");
     let categories = await query.find();
 
@@ -84,9 +91,9 @@ export default function RegisterComponent() {
   };
 
   // Creating rows in the progress table in the same manner as the categories
-  const generateThemeTables = async (u) => {
+  const generateThemeProgressEntries= async (u) => {
     const query = new Parse.Query("Themes");
-    query.equalTo("languageId", currentLanguageCode);
+    query.equalTo("languageId", currentLanguage);
     let themes = await query.find();
 
     console.log("-- Themes", themes);
@@ -130,6 +137,7 @@ export default function RegisterComponent() {
     } else {
       user.set("email", email);
     }
+    user.set("LanguageId", currentLanguage);
     var date = new Date().toLocaleDateString();
     user.add("active_days", date);
     user.add("owned_mascot_ids", "syMxG0A2nM");
@@ -151,8 +159,8 @@ export default function RegisterComponent() {
         .catch((error) => {
           console.log(error);
         });
-      await generateProgressTables(user);
-      await generateThemeTables(user); // Calling the generateThemeTables function
+      await generateCategoryProgressEntries(user);
+      await generateThemeProgressEntries(user);
       history.push("/frontpage");
     } catch (error) {
       Swal.fire({
@@ -213,7 +221,7 @@ export default function RegisterComponent() {
                       top: "70%",
                       transform: "translateY(-50%)",
                       cursor: "pointer",
-                      fontWeight: "700"
+                      fontWeight: "700",
                     }}
                     onClick={togglePasswordVisibility}
                   >
@@ -232,27 +240,27 @@ export default function RegisterComponent() {
                   {t("this email will be used for password recovery")}
                 </p>
               </Form.Group>
-              {/* <Form.Group>
-                <p>{t("choose language")}</p>
+              <Form.Group className="upperform">
+                <Form.Label>{t("Where are you from")}</Form.Label>
                 <div className="language-flags">
                   <img
                     src={DanishFlag}
                     alt="Danish Flag"
                     className={`flag-image ${
-                      language === "02" ? "selected" : ""
+                      currentLanguage === "da" ? "selected" : "unselected"
                     }`}
-                    onClick={() => handleLanguageChange("02")}
+                    onClick={() => handleLanguageChange("da")}
                   />
                   <img
                     src={EnglishFlag}
                     alt="English Flag"
                     className={`flag-image ${
-                      language === "01" ? "selected" : ""
+                      currentLanguage === "en" ? "selected" : "unselected"
                     }`}
-                    onClick={() => handleLanguageChange("01")}
+                    onClick={() => handleLanguageChange("en")}
                   />
                 </div>
-              </Form.Group> */}
+              </Form.Group>
               <Form.Group controlId="formClassroom" className="upperform">
                 <Form.Label>{t("classroom code")} </Form.Label>
                 <Form.Control
@@ -279,7 +287,10 @@ export default function RegisterComponent() {
                       role="status"
                       aria-hidden="true"
                     />
-                    <span className="sr-only"> {t("Preparing the app for you")}</span>
+                    <span className="sr-only">
+                      {" "}
+                      {t("Preparing the app for you")}
+                    </span>
                   </>
                 ) : (
                   <>

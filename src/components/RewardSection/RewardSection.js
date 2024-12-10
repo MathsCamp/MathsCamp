@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Container, Row, Col, Button, Image } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { VscSmiley } from "react-icons/vsc";
@@ -9,7 +9,8 @@ import Parse from "parse";
 import "./RewardSection.css";
 import { hotjar } from "react-hotjar";
 import { useTranslation } from "react-i18next";
-import { currentLanguageCode } from "../../App";
+import { LanguageContext } from "../../App";
+
 import { fetchTranslation } from "../../db/TranslationRepository";
 
 export default function RewardSection() {
@@ -17,6 +18,7 @@ export default function RewardSection() {
   const [imgsrc, setImage] = useState("");
   const history = useHistory();
   const { t } = useTranslation();
+  const { currentLanguage } = useContext(LanguageContext);
 
   //Redirects the user to the page they were on when winning the badge
   const handleGoBack = (e) => {
@@ -47,7 +49,7 @@ export default function RewardSection() {
     query.equalTo("objectId", reward_id); 
     const reward = await query.first();
     const textContentId = reward.get("description");
-    const translation = await fetchTranslation(textContentId, currentLanguageCode);
+    const translation = await fetchTranslation(textContentId, currentLanguage);
     console.log(translation);
     const index = rewardArray.map((element) => element.id).indexOf(reward_id);
     const imgsrc = getRewardImage(index);

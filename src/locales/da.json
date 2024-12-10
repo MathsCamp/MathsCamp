@@ -51,6 +51,8 @@
   "enter your password": "Skriv dit password",
   "password": "Password",
   "forgot password": "Glemt dit password? Klik her!",
+  "fill username and password":"Udfyld brugernavn og password",
+  "incorrect credentials":"Forkert brugernavn eller password",
 
   "--- LoginRegisterCard ---": "",
   "welcome to": "Velkommen til",
@@ -66,6 +68,7 @@
   "enter an username": "Skriv et brugernavn",
   "enter a password": "Skriv et password",
   "parental email (optional)": "Forældre-email (valgfri)",
+  "Where are you from": "Hvilket land er du fra",
   "this email will be used for password recovery": "Denne email vil blive brugt til nulstilling af password",
   "classroom code": "Klassekode",
   "enter classcode given by teacher": "Indtast klassekoden givet af din lære",

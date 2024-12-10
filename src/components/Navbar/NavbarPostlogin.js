@@ -63,23 +63,11 @@ export default function NavbarPostlogin() {
       </Col>
       <Col lg={1.5}>
         <div className="btn-toolbar postlogin-toolbar">
-          {/* <Button
+          <Button
             className="btn-primary lg ranking-btn-postlogin"
             onClick={handleRanking}
           >
             {t('ranking')} <Trophy size={15} />
-          </Button> */}
-          <Button
-            className="btn-primary lg ranking-btn-postlogin"
-            onClick={() =>
-              window.open(
-                "https://forms.gle/o2aSK7i1TnajJqfJ7",
-                "_blank",
-                "noopener,noreferrer"
-              )
-            }
-          >
-            {t("Spørgeskema")} <ClipboardCheck size={15} />
           </Button>
           <Button
             className="btn-primary lg home-btn-postlogin"

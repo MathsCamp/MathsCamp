@@ -38,3 +38,23 @@
   background-color: #5d5fef;
   border-color: #5d5fef;
 }
+
+.flag-image{
+  width: 40px;
+  height: 25px;
+  border-radius: 3px; 
+  margin-right: 10px;
+  cursor: pointer;
+  transition: opacity 0.3s, border 0.3s;
+}
+
+.flag-image.selected {
+  opacity: 1;
+  border: 1px solid #000000; /* Green border for the selected language */
+  border-radius: 5px;
+}
+
+.flag-image.unselected {
+  opacity: 0.7;
+  border: none;
+}

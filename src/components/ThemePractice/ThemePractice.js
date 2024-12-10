@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useHistory } from "react-router";
 import Parse from "parse";
 import "./ThemePractice.css";
@@ -15,12 +15,13 @@ import { Container, Row, Form, Col, Button, Image } from "react-bootstrap";
 import { BsLifePreserver, BsCheckCircle, BsCoin, BsArrowRight } from "react-icons/bs";
 import { Gem } from "react-bootstrap-icons";
 import { useTranslation } from "react-i18next";
-import { currentLanguageCode } from "../../App";
 import { getTeacherImage } from "../Utils";
+import { LanguageContext } from "../../App";
 
 export default function ThemePractice() {
   //Translation and practical setup
   const { t } = useTranslation();
+  const { currentLanguage, changeLanguage } = useContext(LanguageContext);
   const location = useLocation();
   const history = useHistory();
 
@@ -35,7 +36,7 @@ export default function ThemePractice() {
   const currentQuestion = themeQuestions[currentQuestionIndex];
   const [isAnswerCorrect, setIsAnswerCorrect] = useState(false);
   const [allQuestionsCompleted, setAllQuestionsCompleted] = useState(false);
-  const [completedBefore, setCompletedBefore] = useState(false);
+  const [completedBefore, setCompletedBefore] = useState(false); //The user will not receive rewards upon completion if this is true
 
   // Rewards - coins and points
   const [totalPoints, setTotalPoints] = useState(0);
@@ -92,7 +93,7 @@ export default function ThemePractice() {
     const Questions = Parse.Object.extend("Questions");
     const query = new Parse.Query(Questions);
     query.equalTo("theme", theme);
-    query.equalTo("languageId", currentLanguageCode);
+    query.equalTo("languageId", currentLanguage);
     query.ascending("order");
     try {
       const results = await query.find();

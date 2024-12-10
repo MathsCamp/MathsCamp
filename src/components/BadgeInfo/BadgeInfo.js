@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { Card, Button, Container, Row, Col } from "react-bootstrap";
 import { Trophy } from "react-bootstrap-icons";
 import { BsChevronRight } from "react-icons/bs";
-import { VscSmiley } from "react-icons/vsc";
 import { useHistory } from "react-router";
 import Parse from "parse";
 import "./BadgeInfo.css";
@@ -11,7 +10,7 @@ import { getRewardImage } from "../Utils";
 import { hotjar } from "react-hotjar";
 import { useTranslation } from "react-i18next";
 import { fetchBatchTranslations } from "../../db/TranslationRepository";
-import { currentLanguageCode } from "../../App";
+import { LanguageContext } from "../../App";
 
 export default function BadgeInfo() {
   const history = useHistory();
@@ -19,6 +18,7 @@ export default function BadgeInfo() {
   const [owned_rewards, setStudentRewards] = useState([]);
   const [translations, setTranslations] = useState({});
   const { t } = useTranslation();
+  const { currentLanguage } = useContext(LanguageContext);
 
   //Redirects the user to the frontpage
   const handleGoFrontpage = (e) => {
@@ -34,7 +34,7 @@ export default function BadgeInfo() {
   const fetchRewards = async () => {
     const Rewards = new Parse.Object.extend("Reward");
     const query = new Parse.Query(Rewards);
-    query.containedIn("languageId", [currentLanguageCode, "any"]);
+    query.containedIn("languageId", [currentLanguage, "any"]);
     const result = await query.find();
     setRewards(result);
 
@@ -44,7 +44,7 @@ export default function BadgeInfo() {
     if (translationIds.length > 0) {
       const fetchedTranslations = await fetchBatchTranslations(
         translationIds,
-        currentLanguageCode
+        currentLanguage
       );
       setTranslations(fetchedTranslations);
     }

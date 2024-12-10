@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Parse from "parse";
 import Sidebar from "../Sidebar/Sidebar";
 import CategoryButton from "../CategoryButton/CategoryButton";
@@ -10,7 +10,7 @@ import "./UserInfoTeacher.css";
 import { hotjar } from "react-hotjar";
 import { useTranslation } from "react-i18next";
 import { fetchBatchTranslations } from "../../db/TranslationRepository";
-import { currentLanguageCode } from "../../App";
+import { LanguageContext } from "../../App";
 
 export default function UserInfo() {
 
@@ -30,6 +30,7 @@ export default function UserInfo() {
   // General
   const history = useHistory();
   const { t } = useTranslation();
+  const { currentLanguage, changeLanguage } = useContext(LanguageContext);
 
   const findCategories = async (id) => {
     // Create a new query for the "Progress" table to find entries based on user_id
@@ -55,7 +56,7 @@ export default function UserInfo() {
     // Fetch translations for the category names
     const translatedCategoryNames = await fetchBatchTranslations(
       categoryNamesTranslated,
-      currentLanguageCode
+      currentLanguage
     );
 
     // Replace category names with translations
@@ -97,7 +98,7 @@ export default function UserInfo() {
   const findThemes = async () => {
     const Themes = Parse.Object.extend("Themes");
     const query = new Parse.Query(Themes);
-    query.equalTo("languageId", currentLanguageCode);
+    query.equalTo("languageId", currentLanguage);
     const themesData = await query.find();
 
     const themesArray = themesData.map((theme) => ({
@@ -198,12 +199,14 @@ export default function UserInfo() {
             </div>
           </Col>
         </Row>
-        <Row>
-          <div className="section-header">
-            <h2> {t("Themes")} </h2>
-            <div className="chip"> {t("New")} </div>
-          </div>
-        </Row>
+        {themes && themes.length > 0 && (
+          <Row>
+            <div className="section-header">
+              <h2>{t("Themes")}</h2>
+              <div className="chip">{t("New")}</div>
+            </div>
+          </Row>
+        )}
         <Row>
           <div className="theme-row">
             {themes.map((theme, index) => {

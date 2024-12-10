@@ -51,6 +51,8 @@
   "enter your password": "Enter your password",
   "password": "Password",
   "forgot password": "Forgot your password? Click me!",
+  "fill username and password":"Fill out a username and a password",
+  "incorrect credentials":"incorrect credentials",
 
   "--- LoginRegisterCard ---": "",
   "welcome to": "Welcome to",
@@ -66,7 +68,8 @@
   "enter a password": "Enter a password",
   "parental email (optional)": "Parental email (optional)",
   "this email will be used for password recovery": "This email will be used for password recovery",
-  "classroom code": "Classroom code",
+  "choose language":"Choose language",
+  "Where are you from": "Where are you from",
   "enter classcode given by teacher": "Enter classcode given by teacher",
   "if no class type noClass": "If no class type: noClass",
   "you need to fill out a username and password": "You need to fill out a username and password",
@@ -195,7 +198,7 @@
   "Categories":"Categories",
   "Welcome back.":"Welcome back.",
   "Start practicing by selecting a category below.":"Start practicing by selecting a category below.",
-  "Choose a theme or a category to start":"Vælg et tema eller en kategori for at starte",
+  "Choose a theme or a category to start":"Choose a theme or a category to start",
 
   "--- Footer ---": "",
   "created by": "Made by students at the IT-University of Copenhagen"

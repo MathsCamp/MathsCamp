@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Parse from "parse";
 import Swal from "sweetalert2";
 import {
@@ -25,7 +25,6 @@ import SpeakBoble from "../../images/Icons/SpeakBoble.svg";
 import "./MultipleChoice.css";
 import { hotjar } from "react-hotjar";
 import { useTranslation } from "react-i18next";
-import { currentLanguageCode } from "../../App";
 
 import { updatePointsOnCorrectAnswer } from "../../db/submittingAnswers";
 import { registerPoints } from "../../db/submittingPoints";
