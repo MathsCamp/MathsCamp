@@ -63,6 +63,7 @@ export default function RegisterComponent() {
       progressTable.set("correct_question_ids", []);
 
       // Set the translationId based on the category name
+      // Needs refactoring
       let translationId;
       switch (categoryName) {
         case "measurement":
@@ -233,7 +234,7 @@ export default function RegisterComponent() {
                 <Form.Label>{t("parental email (optional)")}</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Enter an email"
+                  placeholder={t("enter an email")}
                   onChange={updateEmail}
                 />
                 <p className="information-text">

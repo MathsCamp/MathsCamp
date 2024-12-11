@@ -13,7 +13,7 @@ export default function LoginComponent() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const { currentLanguage, changeLanguage } = useContext(LanguageContext);
+  const { changeLanguage } = useContext(LanguageContext);
   const history = useHistory();
 
   const { t } = useTranslation();

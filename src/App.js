@@ -18,21 +18,25 @@ import "@fontsource/rubik";
 import "@fontsource/solway";
 import i18n from "i18next";
 
+// Global variable, allowing other components to access and update current language
 export const LanguageContext = createContext();
 
 function App() {
+
   // Initialize language from localStorage or default to "da"
   const [currentLanguage, setCurrentLanguage] = useState(() => {
     return localStorage.getItem("appLanguage") || "da";
   });
 
   // Function to change language and persist it in localStorage
+  // useContexts LanguageContext does NOT persist data, thus it must be saved in localStorage
+  // i18n already have a variable in localStorage with the lanugage, but it can't be access for updated manually
   const changeLanguage = (langCode) => {
     setCurrentLanguage(langCode);
-    localStorage.setItem("appLanguage", langCode); // Persist to localStorage, because for some reason, i18n localstorage variable can't be accessed or changed
+    localStorage.setItem("appLanguage", langCode); 
   };
 
-  // Synchronize i18n lang whenever the language changes
+  // Update i18n lang whenever the language changes in LanguageContext
   useEffect(() => {
     i18n.changeLanguage(currentLanguage);
   }, [currentLanguage]);

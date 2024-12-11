@@ -8,8 +8,8 @@ import i18n from 'i18next';
 import { initReactI18next } from "react-i18next";
 import HttpApi from 'i18next-http-backend';
 import LanguageDetector from 'i18next-browser-languagedetector';
-import enTranslation from "./locales/en.json"; // English translation file
-import daTranslation from "./locales/da.json"; // Danish translation file
+import enTranslation from "./locales/en.json";
+import daTranslation from "./locales/da.json";
 
 Parse.serverURL = "https://parseapi.back4app.com/";
 Parse.initialize(
@@ -17,7 +17,8 @@ Parse.initialize(
   "21WLo8P29tkA7IXnOwv8slakAEA9tXGnBbXTzqtc"
 );
 
-// Translation setup
+// Translation setup for i18n
+// See app.js for management of language change
 i18n
   .use(HttpApi)
   .use(LanguageDetector)
@@ -35,15 +36,14 @@ i18n
       escapeValue: false,
     },
     backend: {
-      loadPath: '/locales/{{lng}}.json', // Correct path to translation files
+      loadPath: '/locales/{{lng}}.json', // Path to translation files
     },
     debug: true,
   });
 
 ReactDOM.render(
   <React.StrictMode>
-    {/* Add Suspense around the App component for the translation to properly work */}
-    <Suspense fallback={<div>Loading translations...</div>}>
+    <Suspense fallback={<div>Loading...</div>}>
       <App />
     </Suspense>
   </React.StrictMode>,
